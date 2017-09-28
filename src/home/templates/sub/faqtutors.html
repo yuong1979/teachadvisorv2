@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+}*/
+
+table {
+    border-collapse: collapse;
+/*    border: 1px solid #ddd;*/
+/*	padding: 30px 10px 10px 10px;*/
+
+	
+	height: 40px;
+	width: 100%;
+	table-layout: fixed;
+    vertical-align: bottom;
+/*    border-bottom: 1px solid #ddd;*/
+/*    text-align: center;*/
+/*    text-align: right;*/
+}
+
+th {
+    background-color: #f5f5f5;
+/*    text-align: center;*/
+	padding: 0px 0px 0px 20px;
+}
+
+td {
+	padding: 10px 10px 10px 20px;
+}
+
+tr:hover {
+	background-color: #f5f5f5;
+}
+
+{% endblock %}
+</style>
+
+
+
+
+
+{% block content %}
+<div class="container">
+<small>
+
+<br>
+<br>
+
+<div class="col-sm-6 col-sm-offset-3">
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>FAQ for Tutors</b></h4></div>
+<div class="panel-body">
+
+<br>
+<img src="{% static 'img/FAQ teachers.png' %}" alt="My image" width=100%/>
+<br>
+<br>
+
+<p><strong>How do I register as a tutor?</strong></p>
+<ul style="list-style-type: disc;">
+<li>Sign up</li>
+<li>Register as a tutor and complete your profile</li>
+<li>Start searching for openings.</li>
+<li>Message the student through the openings to discuss terms.</li>
+<li>Proceed with the order process</li>
+<li>Start your tuition job!</li>
+</ul>
+<p>This entire process takes less than 5 minutes!</p>
+<p>Alternatively you can check out our video tutorials for the process.</p>
+<p>&nbsp;</p>
+<p><strong>Is this platform free for tutors?</strong></p>
+<p>This platform is completely free for now including-</p>
+<ul style="list-style-type: disc;">
+<li>Data analytics</li>
+<li>Content management platform that allows tutor to load images relevant to their qualification/testimonials</li>
+<li>Advertising on our search feature - advertising allows tutors to feature their profile ahead of all other tutors for their primary subject.</li>
+</ul>
+<p>&nbsp;<br /><strong>Why should tutors use teach-advisor?</strong></p>
+<p>If tutors perform well they should accumulate good reviews to justify a higher per hour charge and/or more tuition jobs. You can upload content such as documentation of your qualifications and/or testimonials into your profile and leave links to your web site. Leave the marketing to us. Let your performance speak for itself.</p>
+<p><br /><strong>What are the benefits of confirming the order through teach-advisor?</strong></p>
+<p>When you do that, both students and tutors can have a documented proof to confirm that an agreement has been confirmed by both parties and students can review the task when the task is over.</p>
+<p><br /><strong>What happens when I want to cancel the order?</strong></p>
+<p>If the student decides to cancel the tuition session while it is in progress for personal reasons, the student can go to the order details page to cancel the job. If the tutor wants to cancel, they will need to ask the student to cancel. Cancelled orders will not be reflected on tutor reviews.</p>
+<p><br /><strong>Can I make suggestions to improve teach-advisor?</strong></p>
+<p>We are always constantly seeking improvement, and if you have ideas to help us improve, please drop us a note. If you are the first to suggest the implementation a feature that we apply, you stand a chance to win 20 dollars worth of fairprice vouchers!</p>
+<p>&nbsp;</p>
+<p><strong>Tips for applying for applying for tuition jobs</strong></p>
+<p>When interacting with the students on the teach-advisor messenger platform please confirm</p>
+<ul style="list-style-type: disc;">
+<li>Address of the location</li>
+<li>The proposed dates of the tuition sessions</li>
+<li>Fees for the tuition on our messaging platform</li>
+</ul>
+<p><strong>Other guidelines</strong></p>
+<ul style="list-style-type: disc;">
+<li>The standard policy is a payment policy by cheque/cash for the first 4 lessons in advance payable during the first session.</li>
+<li>Tutors could and should request students to leave a review once the tuition job is completed. Tutors with higher/more reviews attract more jobs.</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+</small>
+</div> <!-- /container -->
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title"><b> Reviews for {{ Teacher_Name }} </b></h4>
+</div>
+<div class="panel-body">
+
+{% if object_list %}
+
+	{% for i in object_list %}
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class='col-sm-6'><h5><b>Review: {{i.opening}}</b></h5></div>
+			<small>
+			<p align="right">
+			Reviewed by:
+			{{i.student}}
+			</p>
+			<p align="right">{{i.timestamp}}</p>
+			</small>
+		</div>
+
+		<div class="panel-body">
+
+			<div class='col-sm-4'>
+				<p><b>Details:</b></p>
+				<div class="panel panel-default">
+				<div class="panel-body">
+
+				<p><b>Subject:</b> {{i.subject}}</p>
+				<p><b>Level:</b> {{i.level}}</p>
+
+				<p>
+				<b>Grp Tuition:</b>
+				{% if i.group_tuition == True %}
+				Yes
+				{% else %}
+				No
+				{% endif %}
+				</p>
+
+				<p><b>Rate:</b> ${{i.price}}/Hour</p>
+				<p><b>Score:</b> {{i.get_rscore}}/5.0</p>
+				<p><b>Grades Before:</b> {{i.gradebefore}}</p>
+				<p><b>Grades After:</b> {{i.gradeafter}}</p>
+				</div>
+				</div>
+			</div>
+
+			
+			<div class='col-sm-8'>
+
+			<p><b>Feedback:</b></p>
+			<div class="panel panel-default">
+				<div class="panel-body">
+				<p> {{i.review}}</p>
+
+				</div>
+			</div>
+
+			<p><b>Teacher Comment:</b></p>
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+				<p> {{i.reviewcomment}}</p>
+				</div>
+			</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="row"></div>
+
+	{% endfor %}
+
+{% else %}
+<p><b>Teacher has no reviews currently.</b></p>
+{% endif %}
+
+
+<a href='{{ Teacher_Detail_URL }}' class='btn btn-primary buttonspace' >Back to tutor details</a>
+
+</div>
+</div>
+
+
+{% if page_obj.has_previous %}
+	<a href='{% url "ReviewList" %}?page={{ page_obj.previous_page_number }}'>Previous</a>
+{% endif %}
+Page {{ page_obj.number }} of {{ paginator.num_pages }}
+{% if page_obj.has_next %}
+	<a href='{% url "ReviewList" %}?page={{ page_obj.next_page_number }}'>Next</a>
+{% endif %}
+
+
+
+{% endblock %}
+

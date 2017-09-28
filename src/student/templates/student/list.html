@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+<small>
+
+<h2>List of student</h2>
+
+<form method="GET" action=''>
+
+<input type='text' name='q' placeholder='Search', value='{{ request.GET.q }}'/>
+<input type="submit" value='search'/>
+
+</form>
+
+<br>
+
+
+<div class='row'>
+{% for i in object_list %}
+
+<div class="col-sm-6 col-md-3">
+	<div class="thumbnail">
+		<div class="caption">
+			<b><a href='{{i.get_absolute_url }}'>{{ i.username }}</a>
+			</b>
+				<small>
+					<br>
+						Industry: 
+						{% for i in object.industry_type.all %}
+						{{ i }} ,
+						{% endfor %}
+					<br>
+					student_name: {{ i.student_name }},
+					<br>
+					<p>description: {{ i.description|truncatechars:10 }}</p>
+
+						{% if i.image %}						
+						<img id='img' class="imgphoto" src='{{ i.image.url }}' /><br/>
+						{% endif %}
+
+				</small>
+			
+				
+				<a href='{{i.get_absolute_url }}' class="btn btn-primary" role="button">View</a>
+		</div>
+	</div>
+
+</div>
+
+
+<!-- {% cycle "" "<div class='col-sm-12'><hr/></div></div><div class='row'>" %} -->
+{% endfor %}
+
+
+
+
+</small>
+</div> <!-- /container -->
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,554 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+  background-color:#155A1E;
+  color:#FFF;
+
+}*/
+
+
+
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Your analytics over the most recent 30 days</b></h4></div>
+<div class="panel-body"><br>
+
+
+    {% if request.user.teacher.function %}
+
+      {% if dnotexist %}
+      <p><b>{{ dnotexist }}</b><p>
+      {% endif %}
+
+      <div class="panel panel-default">
+        <!-- Default panel contents -->
+<!--         <div class="panel-heading"><h5 class="panel-title"><b>No. of Views vs Messages vs Orders  </b><i class="fa fa-line-chart fa-x"></i></h5></div> -->
+        <div class="panel-body">
+
+          <center><b>Top word searches by students for the last 30 days  </b></center>
+
+         <div id="chart_div4"></div>
+
+      </div>
+      </div>
+
+
+
+      {% if unotexist %}
+      <p><b>{{ unotexist }}</b><p>
+      {% endif %}
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <center><b>Total Views</b></center>
+        <div id="chart_div5"></div>
+      </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <center><b>Unique Views</b></center>
+        <div id="chart_div6"></div>
+      </div>
+      </div>
+
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <center><b>Messages from students</b></center>
+        <div id="chart_div7"></div>
+      </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <center><b>No. of Orders</b></center>
+        <div id="chart_div8"></div>
+      </div>
+      </div>
+
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <center><b>Messages to Students VS Messages from Students VS Orders (last 30 days)</b></center>
+        <div id="chart_div9"></div>
+      </div>
+      </div>
+
+    {% endif %}
+
+    <a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<div id="chart_div"></div>
+
+<script type="text/javascript">
+
+$(window).resize(function(){
+  // chart1();
+  // chart2();
+  // chart3();
+  chart4();
+  chart5();
+  chart6();
+  chart7();
+  chart8();
+  chart9();
+});
+
+
+
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart4);
+
+function chart4() {
+
+      // doing it in array form
+      var datab = new google.visualization.arrayToDataTable({{ dataw|safe }});
+
+      var options = {
+        // title: 'Number of Views, Messages and Orders',
+        width: $('#chart_div4').width(),
+        // width: 850,
+        height: 200,
+        bar: {groupWidth: '10%'},
+
+        chartArea:{left:30,top:20,width:'95%',height:'65%'},
+
+        // vAxis: { gridlines: { count: 4 } },
+        legend: 'none',
+        // legend: {position: 'right', maxLines: 3},
+        colors: ['336B87'],
+        // isStacked: true,royalblue, lightblue, powderblue
+
+        hAxis: {
+          // title: 'Analytics for last 2 weeks',
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          // title: 'Count',
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+          // baselineColor: '#FFFFFF',
+        }
+      };
+
+      var material = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
+      material.draw(datab, options);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart5);
+
+function chart5() {
+      var datav = new google.visualization.arrayToDataTable({{ datav|safe }});
+      var options = {
+        width: $('#chart_div5').width(),
+        height: 200,
+        legend: 'none',
+
+        chartArea:{left:30,top:20,width:'95%',height:'65%'},
+        colors: ['90AFC5'],
+
+        hAxis: {
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+        }
+      };
+
+      var material = new google.visualization.LineChart(document.getElementById('chart_div5'));
+      material.draw(datav, options);
+    }
+
+
+
+
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart6);
+
+function chart6() {
+      var datau = new google.visualization.arrayToDataTable({{ datau|safe }});
+      var options = {
+        width: $('#chart_div6').width(),
+        height: 200,
+        legend: 'none',
+
+        chartArea:{left:30,top:20,width:'95%',height:'65%'},
+        colors: ['90AFC5'],
+
+        hAxis: {
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+        }
+      };
+
+      var material = new google.visualization.LineChart(document.getElementById('chart_div6'));
+      material.draw(datau, options);
+    }
+
+
+
+
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart7);
+
+function chart7() {
+      var datam = new google.visualization.arrayToDataTable({{ datam|safe }});
+      var options = {
+        width: $('#chart_div7').width(),
+        height: 200,
+        legend: 'none',
+
+        chartArea:{left:30,top:20,width:'95%',height:'65%'},
+        colors: ['90AFC5'],
+
+        hAxis: {
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+        }
+      };
+
+      var material = new google.visualization.LineChart(document.getElementById('chart_div7'));
+      material.draw(datam, options);
+    }
+
+
+
+
+
+
+
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart8);
+
+function chart8() {
+
+      // doing it in array form
+      var datat = new google.visualization.arrayToDataTable({{ datat|safe }});
+
+      var options = {
+        // title: 'Number of Views, Messages and Orders',
+        // width: 850,
+        width: $('#chart_div8').width(),
+        height: 200,
+        bar: {groupWidth: '75%'},
+
+        chartArea:{left:30,top:20,width:'95%',height:'65%'},
+
+        // vAxis: { gridlines: { count: 4 } },
+        legend: 'none',
+        // legend: {position: 'right', maxLines: 3},
+        colors: ['2A3132'],
+        // isStacked: true,royalblue, lightblue, powderblue
+
+        hAxis: {
+          // title: 'Analytics for last 2 weeks',
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          // title: 'Count',
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+          // baselineColor: '#FFFFFF',
+        }
+      };
+
+      var material = new google.visualization.ColumnChart(document.getElementById('chart_div8'));
+      material.draw(datat, options);
+    }
+
+
+
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(chart9);
+      
+      function chart9() {
+
+        var datap = new google.visualization.arrayToDataTable({{ datap|safe }});
+
+        var options = {
+          // title: '% of Views, Messages and Orders',
+          // width: 600,
+          width: $('#chart_div9').width(),
+          height: 200,
+          // vAxis: { gridlines: { count: 4 } },
+          // legend: 'none',
+          chartArea:{left:20,top:40,width:'75%',height:'100%'},
+          legend: {position: 'left', maxLines: 3},
+          colors: ['90AFC5', '336B87', '2A3132'],
+
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div9'));
+
+        chart.draw(datap, options);
+      }
+
+
+
+
+// google.charts.load('current', {packages: ['corechart']});
+// google.charts.setOnLoadCallback(chart1);
+
+// function chart1() {
+
+//       // doing it in array form
+//       var datab = new google.visualization.arrayToDataTable({{ datab|safe }});
+
+//       var options = {
+//         // title: 'Number of Views, Messages and Orders',
+//         // width: 850,
+//         width: $('#chart_div1').width(),
+//         height: 200,
+//         bar: {groupWidth: '75%'},
+
+//         chartArea:{left:30,top:20,width:'95%',height:'65%'},
+
+//         // vAxis: { gridlines: { count: 4 } },
+//         legend: 'none',
+//         // legend: {position: 'right', maxLines: 3},
+//         colors: ['90AFC5', '336B87', '2A3132'],
+//         // isStacked: true,royalblue, lightblue, powderblue
+
+//         hAxis: {
+//           // title: 'Analytics for last 2 weeks',
+//           direction: 1,
+//           textPosition:'out',
+//           textStyle:{color: 'black', fontSize: 10},
+//           format:'none',
+//           slantedText:true,
+//           slantedTextAngle:45,
+//           gridlines: {
+//               color: 'transparent'
+//           },
+//           baselineColor: 'black',
+          
+//         },
+//         vAxis: {
+//           // title: 'Count',
+//           direction: 1,
+//           textStyle:{color: 'black', fontSize: 10},
+//           gridlines: {
+//               color: 'transparent'
+//           },
+//           format: '#,###',
+//           // baselineColor: '#FFFFFF',
+//         }
+//       };
+
+//       var material = new google.visualization.ColumnChart(document.getElementById('chart_div1'));
+//       material.draw(datab, options);
+//     }
+
+
+
+// google.charts.load('current', {packages: ['corechart']});
+// google.charts.setOnLoadCallback(chart2);
+
+// function chart2() {
+
+//       // doing it in array form
+//       var datal = new google.visualization.arrayToDataTable({{ datal|safe }});
+
+//       var options = {
+//         // title: 'Number of Unique Views versus Views',
+//         // width: 850,
+//         width: $('#chart_div1').width(),
+//         height: 400,
+//         // bar: {groupWidth: '10%'},
+//         // vAxis: { gridlines: { count: 4 } },
+//         legend: 'none',
+
+//         chartArea:{left:30,top:20,width:'95%',height:'65%'},
+//         // legend: {position: 'right', maxLines: 3},
+//         colors: ['763626', '90AFC5'],
+//         // isStacked: true,royalblue, lightblue, powderblue
+
+//         hAxis: {
+//           // title: 'Analytics for last 2 weeks',
+//           direction: 1,
+//           textPosition:'out',
+//           textStyle:{color: 'black', fontSize: 10},
+//           format:'none',
+//           slantedText:true,
+//           slantedTextAngle:45,
+//           gridlines: {
+//               color: 'transparent'
+//           },
+//           baselineColor: 'black',
+          
+//         },
+//         vAxis: {
+//           // title: 'Count',
+//           direction: 1,
+//           textStyle:{color: 'black', fontSize: 10},
+//           gridlines: {
+//               color: 'transparent'
+//           },
+//           format: '#,###',
+//           // baselineColor: '#FFFFFF',
+//         }
+//       };
+
+//       var material = new google.visualization.LineChart(document.getElementById('chart_div2'));
+//       material.draw(datal, options);
+//     }
+
+
+// google.charts.load('current', {'packages':['corechart']});
+// google.charts.setOnLoadCallback(chart3);
+      
+//       function chart3() {
+
+//         var datap = new google.visualization.arrayToDataTable({{ datap|safe }});
+
+//         var options = {
+//           // title: '% of Views, Messages and Orders',
+//           // width: 600,
+//           width: $('#chart_div3').width(),
+//           height: 200,
+//           // vAxis: { gridlines: { count: 4 } },
+//           // legend: 'none',
+//           chartArea:{left:20,top:40,width:'75%',height:'100%'},
+//           legend: {position: 'left', maxLines: 3},
+//           colors: ['90AFC5', '336B87', '2A3132'],
+
+//         };
+
+//         var chart = new google.visualization.PieChart(document.getElementById('chart_div3'));
+
+//         chart.draw(datap, options);
+//       }
+
+
+</script>
+
+
+
+
+
+
+
+{% endblock %}
+

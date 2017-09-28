@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title"><b>Your Order</b></h4>
+</div>
+<div class="panel-body">
+
+
+
+	<div class='col-sm-6'>
+
+			<div class="panel panel-default">
+			<div class="panel-heading">
+			<h5 class="panel-title"><b>Details</b></h5>
+			</div>
+			<div class="panel-body">
+
+						<p><b>Order ID:</b> {{ id }}</p>
+						<p><b>Tutor:</b> {{ teacher.last_name }} {{ teacher.first_name }}</p>
+						<p><b>Student:</b> {{ teacher.last_name }} {{ student.first_name }}</p>
+						<p><b>Opening:</b> {{ opening }}</p>
+						<p><b>Subject:</b> {{ subject }}</p>
+						<p><b>Level:</b> {{ level }}</p>
+						<p><b>Region:</b> {{ region }}</p>
+						<p><b>Group Tuition:</b> {% if group_tuition == False %}No{%else%}Yes{% endif %}</p>
+
+						<p><b>Date Started:</b> {{ datetime }}</p>
+			</div>
+			</div>
+
+	</div>
+
+
+	<div class='col-sm-6'>
+
+			<div class="panel panel-default">
+			<div class="panel-heading">
+			<h5 class="panel-title"><b>Status</b></h5>
+			</div>
+			<div class="panel-body">
+						<p><b>Rate:</b> ${{ price }}/Hour</p>
+						<p><b>Status:</b> {{ status }}</p>
+			</div>
+			</div>
+
+
+			{% if status == 'Job In Progress' %}
+
+			{% if request.user.student %}
+			<form action={% url 'Finish' %} method="post" style="display: inline">{% csrf_token %}
+			<input type="hidden" name="order_id" value="{{id}}">
+			<input type="hidden" name="msg_id" value="{{msg.id}}">
+			<input class='btn btn-danger buttonspace' data-action='show-spinner' type="submit" value="Cancel Job">
+			</form>
+			{% else %}
+			<form action={% url 'Finish' %} method="post" style="display: inline">{% csrf_token %}
+			<input type="hidden" name="order_id" value="{{id}}">
+			<input type="hidden" name="msg_id" value="{{msg.id}}">
+			<input class='btn btn-primary buttonspace' data-action='show-spinner' type="submit" value="Job Completed">
+			</form>
+			{% endif %}
+
+			{% endif %}
+
+		<a href='{{ msg.get_absolute_url }}' data-action='show-spinner' class='btn btn-success buttonspace' >Back to Messages</a>
+		<br>
+
+	</div>
+
+
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

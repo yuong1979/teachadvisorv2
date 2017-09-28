@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block special %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            {% block pagetitle %}
+            {% endblock %}
+        </h4>
+    </div>
+    <div class="panel-body">
+    {% if user.is_authenticated %}
+        {% block examdownload_content %}
+        {% endblock %}
+    {% else %}
+        <h2>Please register first. Thank you.</h2>
+        <a href='{% url 'account_signup' %}' class='btn btn-success' >Sign up</a>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

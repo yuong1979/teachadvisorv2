@@ -1,0 +1,121 @@
+{% if i.senduser != request.user %}
+
+<div class="alert alert-success" role="alert">
+<p>{{ i.content }}<p>
+	<small><footer>via {{ i.get_user_name }} | {{ i.timestamp }} </footer></small>
+
+		{% if i.msgtype == 'Job In Progress' and i.mainmessage == False %}
+		<form action='{% url 'OrderDetail' %}' method="get" style="display: inline">
+		<input class='btn btn-primary buttonspace' data-action='show-spinner' type="submit" value="View Order">
+		<input type="hidden" name="msg_id" value="{{i.id}}">
+		</form>
+		{% endif %}
+		
+		{% if i.msgtype == 'Application' and i.mainmessage == False %}
+			{% if request.user.student %}
+			<form action='accconf' method="post" style="display: inline">{% csrf_token %}
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Accept">
+			<input type="hidden" name="msg_id" value="{{i.id}}">
+			</form>
+			<form action='appoffconf' method="post" style="display: inline">{% csrf_token %}
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="CounterOffer">
+			</form>
+			{% endif %}
+		{% endif %}
+
+		{% if i.msgtype == 'Offer' and i.mainmessage == False %}
+			{% if request.user.teacher %}
+			<form action='accconf' method="post" style="display: inline">{% csrf_token %}
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Accept">
+			<input type="hidden" name="msg_id" value="{{i.id}}">
+			</form>
+			<form action='appoffconf' method="post" style="display: inline">{% csrf_token %}
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="CounterOffer">
+			</form>
+			{% endif %}
+		{% endif %}
+
+		{% if request.user.student %}
+		{% if i.msgtype == 'Completed' and i.mainmessage == False %}
+		<form action='{% url 'RecordMsg' %}' method="post" style="display: inline">{% csrf_token %}
+		<input type="hidden" name="msg_id" value="{{ i.parent_id }}"/>
+		<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Review Task">
+		</form>
+		{% endif %}
+		{% endif %}
+
+		{% if i.msgtype == 'Reviewed' and i.mainmessage == False %}
+		<form action='{% url 'ReviewDetail' %}' method="post" style="display: inline">{% csrf_token %}
+		<input type="hidden" name="msg_id" value="{{ i.parent_id }}"/>
+		<input class='btn btn-primary buttonspace' data-action='show-spinner' type="submit" value="View Review">
+		</form>
+		{% endif %}
+
+</div>
+
+{% endif %}
+
+
+{% if i.senduser == request.user %}
+
+<div class="alert alert-info" role="alert">
+<p>{{ i.content }}<p>
+	<small><footer>via {{ i.get_user_name }} | {{ i.timestamp }} </footer></small>
+
+		{% if i.msgtype == 'Job In Progress' and i.mainmessage == False %}
+		<form action='{% url 'OrderDetail' %}' method="get" style="display: inline">
+		<input class='btn btn-primary buttonspace' data-action='show-spinner' type="submit" value="View Order">
+		<input type="hidden" name="msg_id" value="{{i.id}}">
+		</form>
+
+		{% endif %}
+		
+		{% if i.msgtype == 'Application' and i.mainmessage == False %}
+			{% if request.user.student %}
+			<form action='Accept' method="post" style="display: inline">{% csrf_token %}
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Accept Application">
+			</form>
+			{% endif %}
+			{% if request.user.teacher %}
+			<form action='withconf' method="get" style="display: inline">
+				<input type="hidden" name="msg_id" value="{{ i.id }}"/>
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Withdraw Application">
+			</form>
+			{% endif %}
+		{% endif %}
+
+		{% if i.msgtype == 'Offer' and i.mainmessage == False %}
+			{% if request.user.teacher %}
+			<form action='Accept' method="post" style="display: inline">{% csrf_token %}
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Accept Offer">
+			</form>
+			{% endif %}
+			{% if request.user.student %}
+			<form action='withconf' method="get" style="display: inline">
+				<input type="hidden" name="msg_id" value="{{ i.id }}"/>
+			<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Withdraw Offer">
+			</form>
+			{% endif %}	
+		{% endif %}
+
+		{% if request.user.student %}
+		{% if i.msgtype == 'Completed' and i.mainmessage == False %}
+		<form action='{% url 'RecordMsg' %}' method="post" style="display: inline">{% csrf_token %}
+		<input type="hidden" name="msg_id" value="{{ i.parent_id }}"/>
+		<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Review Task">
+		</form>
+		{% endif %}
+		{% endif %}
+
+
+		{% if i.msgtype == 'Reviewed' and i.mainmessage == False %}
+		<form action='{% url 'ReviewDetail' %}' method="post" style="display: inline">{% csrf_token %}
+		<input type="hidden" name="msg_id" value="{{ i.parent_id }}"/>
+		<input class='btn btn-primary buttonspace' data-action='show-spinner' type="submit" value="View Review">
+		</form>
+		{% endif %}
+
+
+</div>
+
+{% endif %}

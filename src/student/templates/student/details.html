@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+{% if object %}
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Student Details</b></h4></div>
+<div class="panel-body">
+
+<div class='row'></div>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><b>Personel Details</b></div>
+  <ul class="list-group">
+<!--     <li class="list-group-item">&nbsp;<b>User name:</b> {{ object.user.username }}</li> -->
+    <li class="list-group-item">&nbsp;<b>First name:</b> {{ object.first_name }}</li>
+    <li class="list-group-item">&nbsp;<b>Surname:</b> {{ object.last_name }}</li>
+    <li class="list-group-item">&nbsp;<b>Contact:</b> {{ object.contact }}</li>
+    <li class="list-group-item">&nbsp;<b>Email:</b> {{ object.user.email }}</li>
+<!--     <li class="list-group-item">&nbsp;<b>Region:</b> {{ object.region }}</li> -->
+  </ul>
+</div>
+
+
+	{% if request.user.is_authenticated %}
+		{% if request.user == object.user %}
+		<a href='{{ object.get_update }}' class='btn btn-success buttonspace' >Edit Details</a>
+
+		<a href='{% url "Home" %}' class='btn btn-primary buttonspace' >Home</a>
+		{% endif %}
+
+		{% if request.user.student.function and request.user != object.user %}
+		<a href='{% url "OpeningSelectMsg" %}' data-action='show-spinner' class='btn btn-success buttonspace' >Message</a>
+
+		<form action='FavTeacherSub' method="post" style="display: inline">{% csrf_token %}
+		<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value={{Submit}}>
+		</form>
+
+		{% endif %}
+	{% else %}
+		<small>Please register to to send messages</small>
+	{% endif %}
+
+
+{% endif %}
+
+</div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+}*/
+
+table {
+    border-collapse: collapse;
+/*    border: 1px solid #ddd;*/
+/*	padding: 30px 10px 10px 10px;*/
+
+	
+	height: 40px;
+	width: 100%;
+	table-layout: fixed;
+    vertical-align: bottom;
+/*    border-bottom: 1px solid #ddd;*/
+/*    text-align: center;*/
+/*    text-align: right;*/
+}
+
+th {
+    background-color: #f5f5f5;
+/*    text-align: center;*/
+	padding: 0px 0px 0px 20px;
+}
+
+td {
+	padding: 10px 10px 10px 20px;
+}
+
+tr:hover {
+	background-color: #f5f5f5;
+}
+
+{% endblock %}
+</style>
+
+
+
+
+
+{% block content %}
+<div class="container">
+<small>
+
+<br>
+<br>
+
+<div class="col-sm-6 col-sm-offset-3">
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>FAQ for Students</b></h4></div>
+<div class="panel-body">
+
+<br>
+<img src="{% static 'img/FAQ Students.png' %}" alt="My image" width=100%/>
+<br>
+<br>
+
+<p><strong>&nbsp;How do I hire a tutor?</strong></p>
+<ul style="list-style-type: disc;">
+<li>Sign up</li>
+<li>Register as a student.</li>
+<li>Create a tuition job.</li>
+<li>Start searching for a tutor</li>
+<li>Message the tutor to discuss terms.</li>
+<li>Proceed with the order process</li>
+</ul>
+<p>Start your tuition job!</p>
+<p>This process takes less than 3 minutes!</p>
+<p><br />Alternatively you can check out our video tutorials for the process.</p>
+<p><br /><strong>Is it free for students/parents?</strong></p>
+<p>Yes this application is completely free for students and parents.</p>
+<p>&nbsp;</p>
+<p><strong>Why should students use teach-advisor?</strong></p>
+<p>For students, you can discuss with tutors all relevant information pertaining to his qualifications and his experience before deciding to hire in free messaging service, therefore you can choose to keep your contact and email private until to decide to proceed with the hiring.</p>
+<p>&nbsp;</p>
+<p><strong>Are the tutors qualified?</strong></p>
+<p>The tutors can upload their relevant information into their profile which students can view and confirm with the tutor. We carry but random ad hoc checks on the documentation that the tutors have uploaded into their profiles to ensure that the documents uploaded are valid and we are in the process of working to agencies to automate the process of the verification. Please inform the tutors to bring their certificates for verification during your first session.</p>
+<p>&nbsp;</p>
+<p><strong>What are the benefits of confirming the order through teach-advisor?</strong></p>
+<p>When you do that, &nbsp;both students and tutors can have a documented proof to confirm that an agreement has been confirmed by both parties and students can review the task when the task is over.</p>
+<p>&nbsp;</p>
+<p><strong>What happens when I want to cancel the order?</strong></p>
+<p>If the student decides to cancel the tuition session while it is in progress for personal reasons, the student can go to the order details to select cancel, the job will be cancelled. If the tutor wants to cancel, they will need to ask the student to cancel. Cancelled orders will not be reflected on tutor reviews.</p>
+<p>&nbsp;</p>
+<p><strong>Can I make suggestions to improve teach-advisor?</strong></p>
+<p>We are always constantly seeking improvement, and if you have ideas to help us improve, please drop us a note. We are happy to hear from you.</p>
+<p>&nbsp;</p>
+<p><strong>Should I be worried about fake reviews and documentation?</strong></p>
+<p>We take all the reviews and documentation uploaded seriously and will investigate claims and take steps to permanently ban users who provide fake reviews and/or documentation on our platform.</p>
+<p><br /><strong>Tips to follow when hiring</strong></p>
+<p>When interacting with the tutors/students on the teach-advisor messenger please confirm</p>
+<ul style="list-style-type: disc;">
+<li>Address of the location,</li>
+<li>The proposed dates of the tuition sessions</li>
+<li>Fees for the tuition on our messaging platform</li>
+</ul>
+<p><strong>Other guidelines</strong></p>
+<ul style="list-style-type: disc;">
+<li>The standard policy is a payment policy by cheque/cash for the first 4 lessons in advance payable during the first session</li>
+<li>Please leave a review for the tutor once the job has been completed.</li>
+</ul>
+<p>&nbsp;</p>
+
+</div>
+</div>
+</div>
+
+</small>
+</div> <!-- /container -->
+
+{% endblock %}
+

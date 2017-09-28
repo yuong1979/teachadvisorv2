@@ -1,0 +1,58 @@
+{% extends "examdownload_base.html" %}
+
+{% block pagetitle %}
+Confirm page.
+{% endblock %}
+
+{% block examdownload_content %}
+
+        {% if warning %}
+            <label style="color: red;">{{ warning }}</label>
+            <br>
+        {% endif %}
+        {% if error %}
+            <label style="color: red;">{{ error }}</label>
+            <br>
+            <button onclick="window.location.href='{%url 'examdownload_subjects_list'%}';">
+                Go to main page
+            </button>
+        {% endif %}
+        {% if exam %}
+            {% if user_credit %}
+                <b>You currently have {{ user_credit }} user credits in your account.</b>
+                <br>
+            {% endif %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                {% if has_no_money %}
+                <label>You have no enough credits.
+                    <br>
+                    You need {{exam.creditcost}} credist to continue.
+                    <br>
+                    If it mistake please contact to administrator.
+                </label>
+                {% else %}
+                <form id='confirm_form' action="" method="post">
+                    {% csrf_token %}
+                    <label>Please check to confirm that {{exam.creditcost}} credits
+                    will be deducted from your account
+                    </label>
+                    <input type="hidden" name="exam" value="{{exam.id}}">
+                    <br>
+                    <label><input type='checkbox' name='agreement'/>
+                        I agree and confirm download
+                    </label>
+                    <br>
+                    <a href='#' onclick='document.getElementById("confirm_form").submit();'
+                        class='buttonspace btn btn-primary'>
+                        Download
+                    </a>
+                </form>
+
+                {% endif %}
+            </div>
+        </div>
+        <a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+        {% endif %}
+
+{% endblock %}

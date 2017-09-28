@@ -1,0 +1,47 @@
+{% extends "examdownload_base.html" %}
+{% load staticfiles %}
+
+<br>
+<br>
+
+{% block pagetitle %}
+List of past exams
+{% endblock %}
+
+
+
+
+{% block examdownload_content %}
+
+
+<br>
+<img src="{% static 'img/old exams.png' %}" alt="My image" width=100%/>
+<br>
+
+    {% regroup exams|dictsort:'exam_type' by exam_type as subjects_list %}
+
+    {% for exam_by_subject in subjects_list %}
+    <div class="col-md-6 text-center">
+    <h3>{{exam_by_subject.grouper}}</h3>
+
+        {% regroup exam_by_subject.list by subject as exam_type_list %}
+        {% for exam_grouped_bytype in exam_type_list %}
+        <button data-toggle="collapse" data-target="#demo{{forloop.parentloop.counter}}-{{forloop.counter}}" class='btn btn-primary buttonspace'>{{ exam_grouped_bytype.grouper }}</button>
+        <div id="demo{{forloop.parentloop.counter}}-{{forloop.counter}}" class="collapse">
+            <div class="panel-body">
+            {% for exam in exam_grouped_bytype.list %}
+            <br>
+            <form id="form{{forloop.parentloop.counter}}_{{forloop.counter}}" action="{% url 'examdownload_confirm' %}" method="GET">
+            <input type="hidden" value="{{exam.id}}" name="exam">
+            <a href="#" onclick="document.getElementById('form{{forloop.parentloop.counter}}_{{forloop.counter}}').submit();">
+                <i class="fa fa-cloud-download"></i>
+                <span>{{exam.title}}</span>
+            </a>
+            </form>
+            {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+{% endblock %}

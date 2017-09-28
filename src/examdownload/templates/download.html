@@ -1,0 +1,16 @@
+{% extends "examdownload_base.html" %}
+
+{% block pagetitle %}
+Downloading..
+{% endblock %}
+
+{% block examdownload_content %}
+    {% if download %}
+        <iframe width="1" height="1" frameborder="0" src="{{download}}"></iframe>
+        <script type="application/javascript">
+        window.onload = function () {
+            window.location.replace("{% url 'examdownload_subjects_list' %}");
+        }
+        </script>
+    {% endif %}
+{% endblock %}

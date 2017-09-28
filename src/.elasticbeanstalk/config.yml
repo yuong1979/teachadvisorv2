@@ -1,0 +1,20 @@
+branch-defaults:
+  default:
+    environment: testenv
+    group_suffix: null
+environment-defaults:
+  testenv1:
+    branch: null
+    repository: null
+global:
+  application_name: teachadvisor
+  default_ec2_keyname: ExternalUser
+  default_platform: Python 2.7
+  default_region: ap-southeast-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: null
+  workspace_type: Application

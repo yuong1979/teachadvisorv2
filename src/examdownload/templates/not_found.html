@@ -1,0 +1,14 @@
+{% extends "examdownload_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block pagetitle %}
+Sorry, page not found.
+{% endblock %}
+
+{% block examdownload_content %}
+    <h2>404</h2>
+    <h3>Page {{ request.get_full_path }} does not exists</h3>
+    <button onclick="window.location.href='{%url 'examdownload_subjects_list'%}'">
+        Go to main page
+    </button>
+{% endblock %}

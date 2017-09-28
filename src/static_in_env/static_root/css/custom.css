@@ -1,0 +1,195 @@
+.text-align-center {
+	text-align: center;
+}
+
+
+.og-price {
+	color:red;
+	text-decoration:line-through;
+}
+
+
+.fa-navbar-cart {
+	font-size: 18px;
+	vertical-align:middle;
+}
+
+/*p {
+	color: red;
+}
+*/
+
+/*.test {
+	color: blue;
+}
+
+*/
+
+
+.container-alert-flash{
+	position:absolute;
+	top: 10px;
+	z-index: 50000;
+	width: 100%;
+	right: 0%;
+	margin: 0px;
+	display:none;
+
+}
+
+/*#div_id_subject_1 .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_subject_2 .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_subject_3 .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}*/
+
+#div_id_level .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_level_grp .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+/*#div_id_level .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}*/
+
+#div_id_educational_level .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_expertise_type .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+
+#div_id_region .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_region_1 .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_region_2 .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_region_3 .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_region_4 .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+
+.extra-top-15 {
+	margin-top: 15px;
+}
+
+
+
+
+
+
+
+
+#div_id_first_level .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_second_level .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_third_level .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+#div_id_education_school .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+
+#div_id_expertise_type .radio-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+
+#div_id_region .checkbox-inline {
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 0;
+}
+
+
+
+
+#navbar-button{
+	width: 44px;
+	height: 34px;
+}
+#navbar-button .close-btn{
+	font-size: 24px!important;
+	line-height: 0!important;
+	color: white!important;
+}
+#navbar-button .close-btn:hover{
+	color: #ddd!important;
+}
+#navbar-button:not(.collapsed) {
+	border: 0!important;
+}
+#navbar-button:not(.collapsed):hover {
+	background-color: transparent!important;
+}
+.no-scroll {
+	margin: 0;
+	height: 100%;
+	overflow: hidden
+}
+

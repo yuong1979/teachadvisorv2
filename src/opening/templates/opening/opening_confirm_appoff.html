@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 class="panel-title msgtitle"><b>Please confirm your {{type}}</b></h2>
+</div>
+<div class="panel-body">
+
+<div class='col-sm-2'></div>
+	
+	<div class='col-sm-4'>
+		<p><h5><b><a href='{{opening.get_absolute_url }}'> {{ opening.title|truncatechars:32 }}</a></b></h5></p>
+
+			<p><b>Subject:</b> {{ opening.subject }}</p>
+
+			<p><b>Level:</b> {{ opening.level }}</p>
+
+			<p><b>Offering:</b> ${{ opening.salary_range }}/Hour</p>
+
+			<p>
+			<b>Negotiable:</b>
+			{% if opening.Negotiable == True %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+			</p>
+
+			<p><b>Location:</b> {{ opening.region }}</p>
+				
+	</div>
+
+<div class='col-sm-4'>
+
+	<br>
+	<form action='{% url 'OpeningConfirmAppOff' %}' method="POST" style="display: inline">{% csrf_token %}
+	{{ form|crispy }}
+	<br>
+	<input class='btn-block btn btn-success' type="submit" value="Confirm">
+	</form>
+	
+</div>
+
+<div class='col-sm-2'></div>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}
+

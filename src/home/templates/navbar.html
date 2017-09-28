@@ -1,0 +1,79 @@
+   {% load staticfiles %}
+
+<style>
+    .navbar {
+        margin-bottom:0;
+    }
+</style>
+   
+<!-- Static navbar -->
+<nav class="navbar-pre-expand">
+</nav>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+<!--       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> -->
+        <button type="button" id="navbar-button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="close-btn hidden"><strong>x</strong></span>
+      </button>
+      <a class="navbar-left" href=""><img style="max-width:100px; margin-top: 5px;" src="{% static 'img/logo.jpg' %}" alt="logo"></a>
+
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+        <li><a href="{% url 'Home' %}">Home</a></li>
+
+        <li><a href="{% url 'Contact' %}">Contact</a></li>
+        <li><a href="{% url 'TeacherList' %}">Tutors</a></li>
+        <li><a href="{% url 'OpeningList' %}">Openings</a></li>
+        <li><a href="{% url 'blog_list' %}">Blog</a></li>
+        <li><a href="{% url 'examdownload_subjects_list' %}">Exam Papers</a></li>
+
+
+
+<!--         <li><a href="{% url 'Promotions' %}">Promotions</a></li> -->
+
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+        {% if request.user.is_authenticated %}
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle notification-toggle fa fa-envelope-o fa-2x" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="caret"></span> <span id="msg-count-badge" class="badge">{{ request.session.unread_count }}</span></a>
+            <ul class="dropdown-menu" role="menu" id='notification_dropdown'>
+            </ul>
+        </li>
+        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+
+        {% else %}
+
+          <li><a href="{% url 'account_signup' %}">Register</a></li>
+          {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
+<!--             <form class='navbar-form navbar-right' method='POST' action='/accounts/login/'>{% csrf_token %}
+              <div class='form-group'>
+                  <input type='text' class='form-control' name='login' placeholder='Username' /> 
+              </div>
+              <div class='form-group'>
+                  <input type='password' class='form-control' name='password' placeholder='Password' />
+              </div>
+              <button type='submit' class='btn btn-default'>Login</button>
+            </form> -->
+
+            <li><a href="{% url 'account_login' %}">Login</a></li>
+          {% endif %}
+
+        {% endif %}
+
+      </ul>
+
+
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

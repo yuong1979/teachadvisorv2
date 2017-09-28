@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+
+{% block meta %}
+
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ instance.title }}"/>
+    <meta property="og:image" content="{{ instance.image.url }}"/>
+
+{% endblock %}
+<style>
+    {% block style %}
+
+        .btn-circle {
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 11px;
+            line-height: 1.4;
+            border-radius: 20px;
+        }
+
+        .btn-circle.btn-lg {
+            width: 50px;
+            height: 50px;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.33;
+            border-radius: 25px;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        iframe {
+            display: block;
+            margin: 0 auto;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        .btn-manual {
+            background-color: #336B87;
+        }
+
+
+    {% endblock %}
+</style>
+
+{% block head_title %}{{ instance.title }} | TeachAdvider Blog{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="{% url 'blog_list' %}">
+                    <button class="btn btn-manual"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;Back to Blog
+                        Home
+                    </button>
+                </a>
+            </div>
+        </div>
+        <br>
+        <h1 style="color: #336B87">{{ instance.title }}</h1>
+        <br>
+        <a class="btn btn-primary btn-circle"
+           href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+            <i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-info btn-circle" href="https://twitter.com/home?status={{ request.build_absolute_uri }}">
+            <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-danger btn-circle" href="https://plus.google.com/share?url={{ request.build_absolute_uri }}">
+            <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>
+        </a>
+        <a class="btn btn-primary btn-circle"
+           href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}">
+            <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+        </a>
+        <hr>
+        <br>
+
+
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                {% if instance.post_summary %}
+                    {{ instance.get_markdown_summary }}
+                    <br>
+                {% endif %}
+                {% if instance.youtube_video_id %}
+                    <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/{{ instance.youtube_video_id }}?ecver=1" frameborder="0"
+                            allowfullscreen></iframe>
+                    <br>
+                {% endif %}
+                {{ instance.get_markdown }}
+
+            </div>
+        </div>
+        <br>
+        <h5 align="center">*****</h5>
+
+        <br>
+        <h5><i>{{ instance.created_at.date }}</i></h5>
+        <br>
+
+        <div class="fb-comments" data-width="100%" data-href="{{ request.build_absolute_uri }}"
+             data-numposts="5"></div>
+    </div>
+{% endblock %}

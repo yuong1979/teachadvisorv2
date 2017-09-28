@@ -1,0 +1,435 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+<!-- {% crispy search_form %} -->
+{% load staticfiles %}
+
+{% block meta %}
+     <meta name="title" content="Find Tutors in Singapore - Languages, Math, Sciences, Arts & Humanities">
+     <meta name="description" content="Teach Advisor-The biggest tuition portal Singapore to hire experienced Languages, Math, Sciences, Arts & Humanities tutors online. Start hiring now!">
+     <meta name="keywords" content=": best tuition centre in Singapore, tuition teacher Singapore, best tuition in Singapore , best tuition agency Singapore , home tuition agency Singapore , home tuition Singapore, tuition agency Singapore, private home tuition Singapore, online tuition portal Singapore ,top tuition agency in Singapore">
+ {% endblock %}
+ 
+ {% block head_title %}Find Tutors in Singapore - Languages, Math, Sciences, Arts & Humanities{% endblock %}
+ 
+
+<style>
+{% block style %}
+/*.main-content {
+	height: 0px;
+	width: 0px;
+	margin: 0 auto;
+}*/
+
+/*th, td {
+    padding: 10px;
+    border: 1px solid black;
+}*/
+
+
+/*p.clear {
+    clear: both;
+}*/
+
+
+
+.space {
+    margin: 10px 15px 15px 15px;
+}
+
+/*.test {
+    margin: 100px 150px 100px 80px;
+}*/
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.small {
+    height: 75px;
+    width: 75px;
+    float: right;
+}
+
+.big {
+    height: 100px;
+    width: 100px;
+    float: right;
+}
+
+
+{% endblock %}
+</style>
+
+
+
+
+{% block content %}
+<br>
+<div class="container">
+<small>
+
+<script>
+
+
+
+ 
+
+
+    function saveActiveTab() {
+        // $('.nav-tabs a').click(function (e) {
+        //     e.preventDefault();
+        //     $(this).tab('show');
+        // });
+
+        // store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
+            // var id = $(e.target).attr("href").substr(1);
+            var id = $(e.target).attr("href") + '_';
+            window.location.hash = id;
+        });
+
+        // on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
+        // $('.nav-tabs a[href="' + hash + '"]').tab('show');
+        $('.nav-tabs a[href="' + hash.slice(0, -1) + '"]').tab('show');
+    }
+
+    function refreshSearchResults(form) {
+        // convert form data to Querystring, for instance: '/minimum_years=9&maximum_pay=120'
+        var queryString = form.serialize();
+        var reloadUrlPath = location.pathname + "?" + queryString;
+        $('#search-results').load(reloadUrlPath + ' #search-results');
+    }
+
+    window.onload = function () {
+        saveActiveTab();
+
+        // $( "#div_id_subject_1 label" ).on( "click", function() {
+        //   $( "#div_id_subject_2 input" ).each(function() {
+        //     $( this ).prop( "checked", false );
+        //   });
+        //   $( "#div_id_subject_3 input" ).each(function() {
+        //     $( this ).prop( "checked", false );
+        //   });
+        // });
+        // $( "#div_id_subject_2 label" ).on( "click", function() {
+        //   $( "#div_id_subject_1 input" ).each(function() {
+        //     $( this ).prop( "checked", false );
+        //   });
+        //   $( "#div_id_subject_3 input" ).each(function() {
+        //     $( this ).prop( "checked", false );
+        //   });
+        // });
+        // $( "#div_id_subject_3 label" ).on( "click", function() {
+        //   $( "#div_id_subject_1 input" ).each(function() {
+        //     $( this ).prop( "checked", false );
+        //   });
+        //   $( "#div_id_subject_2 input" ).each(function() {
+        //     $( this ).prop( "checked", false );
+        //   });
+        $("[id^=id_subject]").on( "change", function () {
+           var subjectSelects = $("[id^=id_subject]").not(this);
+             subjectSelects.val( "" );
+        });
+
+        // $("[id^=id_region]").on( "change", function () {
+        //    var regionSelects = $("[id^=id_region]").not(this);
+        //      regionSelects.val( "" );
+        // });
+
+
+        // ajax reload search results on radios/checkboxes/number input(years of experience, salary) change
+        $("#search-teachers-form input[type=checkbox], " +
+            "#search-teachers-form input[type=radio]," +
+
+            //adding select
+            "#search-teachers-form select," +
+
+            "#search-teachers-form input[type=number]").on("keyup change", function () {
+            var form = $("#search-teachers-form");
+            refreshSearchResults(form);
+        });
+
+         // ajax reload search results on text/number fields change
+        //$("#search-teachers-form input[type=text], " +
+        //    "#search-teachers-form input[type=number]").on("keyup change", function () {
+        //    var form = $("#search-teachers-form");
+        //    refreshSearchResults(form);
+        //});
+
+
+        // comment this to reload page on hitting 'Refresh'
+         $("#search-teachers-form input[type=submit]").on('click', function (e) {
+             e.preventDefault();
+             var form = $("#search-teachers-form");
+             refreshSearchResults(form);
+         });
+
+
+         // ajax reset search results by Reset btn
+        $("#search-teachers-form a.btn").on("click", function (e) {
+            $(this).blur();
+
+            if (history.pushState) {
+                window.history.replaceState(null, "", location.href.split("?")[0]);
+            }
+
+            e.preventDefault();
+            // var activeTabId = $(".tab-pane.active a[data-toggle='tab']").attr('href');
+            $('#search-teachers-form').load(location.pathname + ' #search-teachers-form', function(){
+                $(this).children().unwrap();
+                window.onload();
+                // $('.nav-tabs a[href=' + activeTabId + ']').tab('show');
+                var form = $("#search-teachers-form");
+                refreshSearchResults(form);
+            });
+        })
+  };
+  
+
+</script>
+
+
+        <div class="container">
+             <div class="col-md-12">
+               <div class="well">
+ 
+                 <h1>Experienced​ ​&​ ​Qualified​ ​Home​ ​Tutor​s in ​Singapore​ </h1>
+                 <h4>
+                    <p class="fpfont text-justify">Are you trying to hire Physics and Mathematics tutor ​or a Japanese language teacher in Singapore​, Teach Advisor provides highly qualified and experienced freelance tutors online for a wide range of subjects. Our registered tutors can upload their relevant qualifications which the students can check before hiring.</p>
+                    <p class="fpfont text-justify">We conduct frequent ad hoc checks to verify the validation of the documents uploaded by the tutors. We are a trusted online home tuition portal and the first choice amongst our students.</p>
+                 </h4>
+ 
+               </div>
+               <h2 class="text-center">Why​ ​Choose​ ​Us​ ​Over​ ​Other​ ​Online​ ​Tuition​ ​Portal​s in ​Singapore?​​ </h2>
+ 
+             </div>
+ 
+             <div class="col-md-4">
+               <br>
+               <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
+               <h2 align="center" class="feature-heading">​Renowned​ ​Online​ ​Tuition​ ​Portal</h2>
+               <br>
+               <p class="fpfont text-justify">Teach Advisor is the most trusted and renowned online tuition portals in Singapore and we facilitate students to connect with our qualified freelance tutors.</p>
+             </div>
+ 
+             <div class="col-md-4">
+               <br>
+               <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
+               <h2 align="center" class="feature-heading">Most​ ​Satisfied​ ​Students</h2>
+               <br>
+               <p class="fpfont text-justify">We have the most number of satisfied students for jc maths tuition, jc economics tuition Singapore ​and more. Our students can post reviews on tutors which students can check before hiring. Students can verify the documents that the tutors upload.</p>
+             </div>
+ 
+             <div class="col-md-4">
+               <br>
+               <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
+               <h2 align="center" class="feature-heading" style="min-height: 66px;">Cost​ ​Effective</h2>
+               <br>
+               <p class="fpfont text-justify">The cost of hiring a tutor on our website is completely free. We do not charge commisson on the tutors which means the can carry the cost savings to the hiring student.</p>
+             </div>
+ 
+           </div>
+   <br>
+
+
+<div class="panel-group" id="accordion">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><b>Search for Tutors</b></a>
+        </h4>
+      </div>
+        <div class="panel-body">
+
+        {% crispy form %}
+
+    	</div>
+      </div>
+</div> 
+
+
+<br>
+
+
+<div id="search-results">
+
+{% if featureduser0 %}
+
+<div class="col-sm-6">
+	<div class="thumbnail">
+	<div class="caption">
+
+		<h5><b><a href='{{featureduser0.get_absolute_url }}'>{{ featureduser0.title|truncatechars:50 }}</a></b></h5>
+
+		{{ featureduser0.description|truncatechars:240 }}
+
+
+<!--         {% if featureduser0.image %}
+        <img align="right" src='{{ featureduser0.image.url }}' /><br/>
+        {% else %}
+        <img align="right" src='{% static 'img/anonymous.jpg' %}' /><br/>
+        {% endif %} -->
+<!--         <a href='{{featureduser0.get_absolute_url }}'>{{ featureduser0.image }}</a> -->
+
+		<br><br>
+		<small><p align="right">Advertisement</p></small>
+
+	</div>
+	</div>
+</div>
+
+{% endif %}
+
+
+{% if featureduser1 %}
+<div class="col-sm-6">
+	<div class="thumbnail">
+	<div class="caption">
+
+		<h5><b><a href='{{featureduser1.get_absolute_url }}'>{{ featureduser1.title|truncatechars:50 }}</a></b></h5>
+
+		{{ featureduser1.description|truncatechars:240 }}
+
+<!--         <a href='{{featureduser1.get_absolute_url }}'>{{ featureduser1.advimage }}</a> -->
+
+		<br><br>
+		<small><p align="right">Advertisement</p></small>
+
+	</div>
+	</div>
+</div>
+
+{% endif %}
+
+
+{% if object_list %}
+
+	{% for i in object_list %}
+
+	<div class="col-xs-12 col-sm-4 col-md-3">
+		<div class="thumbnail">
+			<div class="caption">
+				<h5><b><a href='{{i.get_absolute_url }}'>{{ i.title|truncatechars:30 }}</a></b></h5>
+				<div class="row"></div>
+
+
+<!-- 					<small> -->
+							<div class="small">
+							{% if i.image %}
+							<img align="right" src='{{ i.image.url }}' /><br/>
+							{% else %}
+							<img align="right" src='{% static 'img/anonymous.jpg' %}' /><br/>
+							{% endif %}
+							</div>
+						<br>
+
+						<p>
+						<b>Jobs Count:</b>
+
+						{% if i.get_job_count %}
+						{{ i.get_job_count }}
+						{% else %}
+						0
+						{% endif %}
+						</p>
+
+
+
+						<p>
+						<b>Rating:</b>
+
+						{% if i.review_score %}
+						{{ i.review_score }}/5.0
+						{% else %}
+						None
+						{% endif %}
+						</p>
+
+<!-- 						<p>
+						<b>Experience:</b>
+						{% if i.years_of_experience %}
+						{{ i.years_of_experience }} years
+						{% else %}
+						None
+						{% endif %}
+						</p> -->
+
+<!-- 						<p>
+						<b>Status:</b> {{ i.expertise_type }}
+						</p> -->
+
+
+<!-- 						<p>
+						<b>Expected Salary:</b>
+						{% if i.salary_expectation %}
+						${{ i.salary_expectation }}/Hour
+						{% else %}
+						None
+						{% endif %}
+						</p> -->
+
+						<p>
+						<b>Supporting Docs:</b>
+						{% if i.get_sub_status == True %}
+						Yes
+						{% else %}
+						None
+						{% endif %}
+						</p>
+
+<!-- 						<p>
+						<b>Favorited:</b>
+						{% if i.favteacher.student.all.count %}
+						{{ i.favteacher.student.all.count }} Times
+						{% else %}
+						0 Times
+						{% endif %}
+						</p> -->
+
+<!-- 						<br>
+						<b>Viewed:</b>
+						{% if i.viewteacher.student.all.count %}
+						{{ i.viewteacher.student.all.count }} Times
+						{% else %}
+						None
+						{% endif %} -->
+
+<!-- 						</small> -->
+
+			</div>
+		</div>
+
+	</div>
+
+	{% endfor %}
+
+{% else %}
+
+There are no results matching your query
+
+{% endif %}
+
+</div>
+
+<div class="row"></div>
+
+	{% if page_obj.has_previous %}
+		<a href='{% url "TeacherList" %}?page={{ page_obj.previous_page_number }}'>Previous</a>
+	{% endif %}
+	Page {{ page_obj.number }} of {{ paginator.num_pages }}
+	{% if page_obj.has_next %}
+		<a href='{% url "TeacherList" %}?page={{ page_obj.next_page_number }}'>Next</a>
+	{% endif %}
+
+
+</small>
+</div> <!-- /container -->
+
+{% endblock %}
+
+
+

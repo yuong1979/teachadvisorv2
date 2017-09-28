@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+<!-- 
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Your Orders</b></h4></div>
+<div class="panel-body">
+
+{% if object_list %}
+
+	{% for i in object_list %}
+	<div class="col-sm-12">
+		<div class="thumbnail">
+			<div class="caption">
+				<b><a href='{{i.get_order_opening }}'>{{ i.oopening }}</a></b>
+				<small>
+							{% if i.image %}
+
+							{% else %}
+
+							{% endif %}
+							
+						<br>
+						<b>Teacher:</b> {{ i.oteacher }}
+						<br>
+						<b>Student:</b> {{ i.ostudent }}
+						<br>
+						<b>Status:</b>
+						{% if i.status == 'Inactive' %}
+						Pending other party
+						{% else %}
+						{{ i.status }}
+						{% endif %}
+						<br>
+						<b>Task Started:</b> {{ i.timestamp }}
+
+				{% if i.status == 'In Progress' %}
+
+					{% if request.user.student %}
+					<form class='db' action={% url 'Finish' %} method="post" style="display: inline">{% csrf_token %}
+					<input type="hidden" name="order_id" value="{{i.id}}">
+					<input class='db-submit col-xs-11 btn btn-danger buttonspace' data-action='show-spinner' type="submit" value="Cancel Job">
+					</form>
+
+					<div id='dc' title='Confirmation' style='display:none'>
+					  <p>Please confirm that you want to proceed with the cancellation.</p>
+					</div>
+
+					{% else %}
+					<form class='db' action={% url 'Finish' %} method="post" style="display: inline">{% csrf_token %}
+					<input type="hidden" name="order_id" value="{{i.id}}">	
+					<input class='db-submit col-xs-11 btn btn-primary buttonspace' data-action='show-spinner' type="submit" value="Job Completed">
+					</form>
+
+					<div id='dc' title='Confirmation' style='display:none'>
+					  <p>Please confirm that you have completed the task and requesting for your student to review.</p>
+					</div>
+
+					{% endif %}
+
+				{% else %}
+
+					{% if request.user.student %}
+					<input class='disabled col-xs-11 btn btn-danger buttonspace' type="submit" value="Cancel Job">
+					{% else %}
+					<input class='disabled col-xs-11 btn btn-primary buttonspace' type="submit" value="Job Completed">
+					{% endif %}		
+
+				{% endif %}
+				</small>
+				<br>
+				<br>
+				<br>
+
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+
+
+{% if page_obj.has_previous %}
+	<a href='{% url "OrderList" %}?page={{ page_obj.previous_page_number }}'>Previous</a>
+{% endif %}
+{{ page_obj.number }} of {{ paginator.num_pages }}
+{% if page_obj.has_next %}
+	<a href='{% url "OrderList" %}?page={{ page_obj.next_page_number }}'>Next</a>
+{% endif %}
+
+{% else %}
+<b>You have no orders yet.</b>
+{% endif %}
+</div>
+</div>
+
+
+{% endblock %}
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

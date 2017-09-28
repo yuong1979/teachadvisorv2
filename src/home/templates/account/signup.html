@@ -1,0 +1,45 @@
+{% extends "account/base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<div class='col-sm-6 col-sm-offset-3'>
+<h1>{% trans "Sign Up" %}</h1>
+
+
+{% load socialaccount %}
+{% providers_media_js %}
+
+<br>
+<a class="btn btn-primary" href="{% provider_login_url "facebook" method="js_sdk" %}">Connect via Facebook</a>
+<b><br><br><br></b>
+<a class="btn btn-danger" href="{% provider_login_url "google" method="js_sdk" %}">Connect via Google</a>
+<br>
+
+<br><br>
+
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form|crispy }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button class="btn btn-success" type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+<div>
+
+<br>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+{% endblock %}

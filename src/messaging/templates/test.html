@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+
+
+<style>
+{% block style %}
+
+
+      .img1 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img2 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img3 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img4 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img5 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img6 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img7 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+      .img8 {
+          max-height: 100px;
+          max-width: 100px;
+      }
+
+      .enlarged {
+          max-height: 500px;
+          max-width: 500px;
+      }
+
+      .hide {
+          max-height: 0px;
+          max-width: 0px;
+      }
+{% endblock %}
+</style>
+
+
+
+
+
+      <script>
+      {% block jquery %}
+      $(document).ready(function(){
+
+
+
+        $(".img1").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+        });
+        $(".img2").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+
+        });
+        $(".img3").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+
+        });
+        $(".img4").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+        });
+        $(".img5").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+        });
+        $(".img6").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+        });
+          $(".img7").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img8").toggleClass('hide');
+        });
+        $(".img8").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+            $(".img7").toggleClass('hide');
+        });
+      });
+      {% endblock %}
+      </script>
+
+
+
+
+
+
+{% block special %}
+
+
+<div class="square1">
+
+
+    <img class='img1' src='http://xiostorage.com/wp-content/uploads/2015/10/test.png' />
+
+    <img class='img2' src='https://blog.prepscholar.com/hubfs/body_testinprogress.gif?t=1492060040003' />
+
+    <img class='img3' src='http://www.velior.ru/wp-content/uploads/2009/05/Test-Computer-Key-by-Stuart-Miles.jpg' />
+
+    <img class='img4' src='http://empow.me/wp-content/uploads/2013/04/test-1170x589.gif' />
+
+    <img class='img5' src='http://w3af.org/wp-content/uploads/beta-testing.png' />
+
+    <img class='img6' src='http://w3af.org/wp-content/uploads/beta-testing.png' />
+
+
+
+</div>
+
+
+{% endblock %}

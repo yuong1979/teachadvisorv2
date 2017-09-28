@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+
+{% block special %}
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Tuition Job Details</b></h4></div>
+<div class="panel-body">
+
+{% if object %}
+
+	<div class="panel panel-default">
+	  <div class="panel-heading"><h4 class="panel-title"><b>{{ object.title }}</b></h4></div>
+	</div>
+
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	  	<b>Teaching Requirements</b>
+	  </div>
+
+	  <div class="panel-body">
+
+		&nbsp;<b>Subject:</b> {{ object.subject }}
+		<br>
+		<br>
+		&nbsp;<b>Level:</b> {{ object.level }}
+		<br>
+		<br>
+		&nbsp;<b>Other requirements:</b> {{ object.description }}
+		<br>
+	  </div>
+	</div>
+
+
+	<div class="panel panel-default">
+	  <div class="panel-heading"><b>Other Details</b></div>
+	  <ul class="list-group">
+
+		<li class="list-group-item">&nbsp;<b>Asking Rate:</b>
+			{% if object.salary_range != None %}
+			${{ object.salary_range }}/Hour
+			{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Negotiable:</b>
+			{% if object.salary_negotiable == true %}No{%else%}Yes{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Region:</b>
+			{{ object.region }}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Opening Updated:</b>
+			{{ object.date_modified }}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Opening Availability:</b>
+			{% if object.job_active == True %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Group Tuition:</b>
+			{% if object.group_tuition == True %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</li>
+
+
+<!-- 		<li class="list-group-item">&nbsp;<b>Job Active:</b>
+			{% if object.job_active == True %}
+			Yes
+			{% else %}
+			No
+			{% endif %}
+		</li> -->
+	
+	  </ul>
+	</div>
+
+
+<!-- 	<div class="panel panel-default">
+	  <div class="panel-heading"><b>Analytics</b></div>
+	  <ul class="list-group">
+
+		<li class="list-group-item">&nbsp;<b>Favorited:</b>
+			{% if object.favopening.teacher.all.count %}
+			{{ object.favopening.teacher.all.count }} Times
+			{% else %}
+			None
+			{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Viewed:</b>
+			{% if object.viewopening.teacher.all.count %}
+			{{ object.viewopening.teacher.all.count }} Times
+			{% else %}
+			None
+			{% endif %}
+		</li>
+			
+	  </ul>
+
+	</div> -->
+
+
+
+
+
+	{% if request.user.is_authenticated %}
+
+		{% if request.user == object.user %}
+		<a href='{{ object.get_update }}' class='btn btn-success buttonspace' >Edit Details</a>
+		<a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+		{% endif %}
+
+		{% if request.user.teacher.function == "Teacher" and request.user != object.user %}
+		<a href='Oselectmsgw' class='btn btn-success buttonspace' >Message</a>
+		<form action='FavOpeningSub' method="post" style="display: inline">{% csrf_token %}
+		<input class='btn btn-success buttonspace' type="submit" value={{Submit}}>
+		</form>
+		<a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+		{% endif %}
+
+	{% else %}
+		<small>Please register to to send messages</small>
+	{% endif %}
+
+
+</div>
+</div>
+
+
+{% endif %}
+
+	{% if object.trial_acc == True %}
+	<small><p class='pull-right'>Account Type:Trial</p></small>
+	{% else %}
+	{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

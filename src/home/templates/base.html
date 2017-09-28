@@ -1,0 +1,897 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="google-site-verification" content="wgDqrd9St3JQSG3Hkt35m3vccyIPYRLgxjyxdeZZ7ME" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta name="title" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico">
+ -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/manifest.json' %}">
+    <link rel="mask-icon" href="{% static 'favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
+    <meta name="msapplication-config" content="{% static 'favicon/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-106024449-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+    {% block meta %}
+
+    {% endblock %}
+
+
+    <title>{% block head_title %}Teach Advisor{% endblock %}</title>
+
+{% include 'head_css.html' %}
+
+      <style>
+      {% block style %}
+
+      {% endblock %}
+
+/*        .jumbotron-billboard .img {
+            margin-bottom: 0px;
+            opacity: 0.75;
+            color: #fff;
+            background: #000 url("{% static 'img/banner.png' %}") center center;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            overflow: hidden;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .jumbotron {
+            position: relative;
+            padding: 50px;
+        }
+
+        .jumbotron .container {
+            z-index: 2;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mark-class {
+            opacity: 0.9;
+            background: #336B87;
+            color: white;
+        }*/
+
+        .jumbotron {
+            background: url('{% static 'img/banner.png' %}');
+            background-position: 0% 25%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-top: 0;
+        }
+
+
+        #foot {
+            background-color: lightgray;
+/*            padding-bottom: 8px;*/
+            padding:20px 20px 20px 20px;
+
+        }
+
+
+
+
+        .btn-manual {
+            background-color: #336B87;
+            color: white;
+        }
+
+        /*      .test {
+                color: white;
+                padding:20px 20px 20px 20px;
+              }*/
+
+        .fpfont {
+            font-size: 1.1em;
+            /*          font-weight: bold;*/
+        }
+
+        .panel > .panel-heading {
+            background-color: #336B87;
+            color: white;
+        }
+
+       #section-3 {
+            background-color: beige;
+            padding-top: 1.5rem;
+            padding-bottom: 3rem;
+       }
+
+       #section-4 {
+            padding-top: 1.5rem;
+            padding-bottom: 3rem;
+        }
+
+       #section-5 {
+            background-color: beige;
+            padding-top: 1.5rem;
+            padding-bottom: 3rem;
+       }
+
+        .white-text {
+            color: white;
+        }
+
+        .fa-lg {
+            color: #336B87;
+        }
+
+        .feature-heading {
+            color: #336B87;
+        }
+
+
+        mark {
+            background: #336B87;
+            opacity: 0.9;
+            position: absolute;
+            padding: 0rem;
+            color: white;
+        }
+        .highlight {
+            background: #336B87;
+            opacity: 0.9;
+            color: white;
+        }
+
+        .btn-round{
+            border-radius: 17px;
+        }
+
+        .btn-round-lg{
+            border-radius: 22.5px;
+        }
+
+
+        #noti {
+            padding: 1px 10px 1px 10px;
+            font-size: 12px;
+        }
+
+        .dropdown-menu {
+            width: 200px !important;
+            /*          height: 400px !important;*/
+        }
+
+        .buttonspace {
+            margin: 10px 10px 10px 10px;
+            width: 180px;
+            text-align: center;
+
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .spinner-position {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ccc;
+            border-top-color: #ff6a00;
+            border-radius: 100%;
+            margin: auto;
+            animation: spin 2s linear infinite;
+        }
+
+        .spinner-text {
+            margin-top: 15px;
+        }
+
+        @keyframes spin {
+
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #overlay {
+            height: 100%;
+            width: 100%;
+            background: rgba(255, 255, 255, .95);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 2000;
+        }
+
+      </style>
+
+  </head>
+
+  <body>
+
+
+
+<div id="fb-root"></div>
+
+      {% block additional_links %}
+      {% endblock %}
+
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.10";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+{% include 'navbar.html' %}
+
+    <div id="overlay">
+      <div class="spinner-position">
+        <div class="spinner"></div>
+        <div class="spinner-text">Page Loading</div>
+      </div>
+    </div>
+
+
+
+<div class='container'>
+
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ message }}
+    </div>
+  {% endfor %}
+</div>
+
+
+
+
+  {% block content %}
+
+
+    {% if not request.user.is_authenticated %}
+
+
+        <div class="jumbotron">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <br>
+                        <h1 style="font-size: 5vmax"><span class="highlight">Welcome!</span></h1>
+
+                        <h3 style="font-size: 2.5vmax"><mark>Digital Marketplace for Freelance Tutors and Students.</mark>
+                        </h3>
+                        <!--             <p>FOR FREE!<p> -->
+                        <br><br><br><br>
+                        <a class="btn btn-success" href={% url 'account_signup' %} role="button">Sign Up Here</a>
+                        <br><br><br>
+                    </div>
+                </div>
+
+
+                {#                <div class="col-md-3">#}
+                {#                    <h1><i class="fa fa-graduation-cap fa-4x" aria-hidden="true"></i></h1>#}
+                {#                </div>#}
+                <!--           <div class="col-sm-4" style="background-color:black;height:315px;"><iframe width="300" height="315" src="https://www.youtube.com/embed/8r0CiLBM1o8" frameborder="0" allowfullscreen></iframe>
+                          </div> -->
+            </div>
+        </div>
+
+
+
+
+          <div id="section-2">
+              <div class="container">
+             <div class="col-md-10 col-md-offset-1">
+                 <h2 align="center" class="feature-heading">Leading Home Tuition Agency in Singapore</h2>
+
+                 <br>
+
+                   <p class="fpfont text-justify">Teach Advisor-The leading online tuition portal Singapore where students meet tutors to improve their academic scores. We provide a trusted platform to both the students and the tutors, wherein the tutors can build their tutoring career with ease and the students can get help to improve their academic scores.</p>
+
+
+               </div>
+              </div>
+              <br><br>
+                 </div>
+
+
+
+<div id="section-3">
+    <div class="container">
+        <div class="row">
+            <h2 align="center">Limited time offers</h2>
+        <div class="col-sm-5 col-sm-offset-1">
+            <h3 align="center" class="feature-heading">All Services are Free!</h3>
+         <p class="fpfont text-justify">As part of our marketing campaign, usage of our services is completely free between September to December 2017.</p>
+            <br>
+            <div align="center"><button type="button" class="btn btn-primary btn-round-lg btn-lg">Free till December 2017</button></div>
+        </div>
+        <div class="col-sm-5">
+            <h3 align="center" class="feature-heading">Free $20 Fairprice Vouchers</h3>
+          <p class="fpfont text-justify">Please let us know how we can improve. If you are the first to suggest changes that we implement, we will mail you a $20 Fairprice voucher. </p>
+        <div align="center"><a href='{% url 'Contact' %}'><button type="button" class="btn btn-primary btn-round-lg btn-lg">Send Feedback</button></a></div>
+        </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div id="section-4">
+    <h2 class="center">Why​ ​Should​ ​Students​ ​Opt​ ​For​ ​Teach​ ​Advisor? </h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 align="center" class="feature-heading">Quality Freelance Tutors</h3>
+                    <br>
+                    <p class="fpfont text-justify">This is the place where students can find quality online freelance tutors. All our tutors are well experienced and highly qualified who have the right skills to teach students efficiently.</p>
+            </div>
+            <div class="col-sm-4">
+                <h3 align="center" class="feature-heading">Abundant Choice of Tutors</h3>
+                    <br>
+                    <p class="fpfont text-justify">Students can select tuition teacher Singapore of their choice. We have a lot of tutors for a single subject and the students have the option of selecting the best.</p>
+            </div>
+
+            <div class="col-sm-4">
+                <h3 align="center" class="feature-heading">Instant​ ​Academic​ ​Solution</h3>
+                    <br>
+                    <p class="fpfont text-justify">Students can get rid of their entire academic doubts and that too instantly. All they have to do is to use Teach Advisor hire help from the freelance tutors.</p>
+            </div>
+        </div>
+        <br>
+        <div align="center"><a href='{% url 'FAQStudent' %}'><button type="button" class="btn btn-primary btn-round-lg btn-lg">FAQ for Students</button></a></div>
+    </div>
+</div>
+
+
+<div id="section-5">
+    <h2 class="center">Why​ ​Should​ ​Freelance​ ​Tutors​ ​Opt​ ​For​ ​Teach​ ​Advisor?</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 align="center" class="feature-heading"> Great​ ​Platform​ ​to​ ​Build​ ​Tutoring​ ​Career</h3>
+                    <br>
+                    <p class="fpfont text-justify">Teach Advisor-The best tuition centre in Singapore provides a great platform for the tutors to build their tutoring career. Our easy hiring process makes the getting a tuition job a hassle free task.</p>
+            </div>
+            <div class="col-sm-4">
+                <h3 align="center" class="feature-heading">Great​ ​Marketing​ ​Opportunities</h3><br>
+                    <br>
+                    <p class="fpfont text-justify">We not only provide the platform to start a freelance tutoring career but also provide marketing opportunities. Tutors can monitor their progress and also grow at the same time.</p>
+            </div>
+
+            <div class="col-sm-4">
+                <h3 align="center" class="feature-heading">Brand​ ​Building</h3><br>
+                    <br>
+                    <p class="fpfont text-justify">Our tutor review system enables students to post reviews about freelance tutors. Our review system helps the tutor create his own brand for home​ ​tuition​ ​in Singapore quickly.</p>
+            </div>
+        </div>
+        <br>
+        <div align="center"><a href='{% url 'FAQTutor' %}'><button type="button" class="btn btn-primary btn-round-lg btn-lg">FAQ for Tutors</button></a></div>
+    </div>
+</div>
+
+
+        <div id="features">
+        <!-- Example row of columns -->
+
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <br>
+                    <h1 align="center"><i class="fa fa-search fa-lg" aria-hidden="true"></i></h1>
+                    <h2 align="center" class="feature-heading">Robust Search </h2>
+                    <br>
+                    <p class="fpfont text-justify">We feature a easy to use and dynamic search function for you to
+                        browse
+                        through our wide ranging database of tutors and tuition jobs available. We feature a
+                        review system that identifies performing tutors to support your needs. </p>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a class="btn btn-primary btn-block" href="{% url 'OpeningList' %}" role="button">Job Search &raquo;</a></div>
+                        <div class="col-xs-6">
+                            <a class="btn btn-primary btn-block" href="{% url 'TeacherList' %}" role="button">Tutor Search &raquo;</a></div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <br>
+                    <h1 align="center"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></h1>
+                    <h2 align="center" class="feature-heading">Get Hired Quickly</h2>
+                    <br>
+                    <p class="fpfont text-justify">Freelancing tutors who sign up avoid the hassle of maintaining a
+                        website
+                        or working through a intermediary. Over here we want to focus on your core expertise.
+                        <b>Tutoring.</b> On this platform you can upload your profile and start getting offers
+                        immediately! </p>
+                    <a class="btn btn-primary btn-block" href="{% url 'account_signup' %}" role="button">Get Hired
+                        &raquo;</a>
+                </div>
+                <div class="col-md-3">
+                    <br>
+                    <h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>
+                    <h2 align="center" class="feature-heading">Free to Use</h2>
+                    <br>
+                    <p class="fpfont text-justify">Basic services are free. Additional services can be paid with credits
+                        that
+                        you can earn by giving and recieving reviews. Additional services provided to tutors
+                        include content management, analytics and advertising.</p>
+                    <br>
+                    <a class="btn btn-primary btn-block" href="{% url 'Tutorials' %}" role="button">Watch our Tutorials
+                        &raquo;</a>
+                </div>
+                <div class="col-md-3">
+                    <br>
+                    <h1 align="center"><i class="fa fa-users fa-lg" aria-hidden="true"></i></h1>
+                    <h2 align="center" class="feature-heading">Flexible Hiring</h2>
+                    <br>
+                    <p class="fpfont text-justify">Negotiate on prices and decide on details by getting in directly in
+                        contact with your tutor/student through our built in messaging services. Finalize the
+                        hiring process with a built-in order form to avoid any misunderstanding.</p>
+                    <br>
+                    <a class="btn btn-primary btn-block" href="{% url 'account_signup' %}" role="button">Start Hiring
+                        &raquo;</a>
+                </div>
+
+            </div>
+            <br><br>
+        </div>
+
+
+
+
+
+<!--       <nav class="navbar navbar-default test"> -->
+
+
+
+        <!--       <nav class="navbar navbar-default test"> -->
+        <footer id="foot">
+            <br><br>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <p><b> About </b></p>
+                        <p><a href='{% url 'AboutUs' %}'>Our Mission</a></p>
+                        <p><a href='{% url 'Careers' %}'>Careers</a></p>
+                        <p><a href='{% url 'Press' %}'>Press</a></p>
+                        <p><a href='{% url 'Partnership' %}'>Partnerships</a></p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p><b> Support </b></p>
+                        <p><a href='{% url 'FAQTutor' %}'>FAQ for Tutors</a></p>
+                        <p><a href='{% url 'FAQStudent' %}'>FAQ for Students</a></p>
+                        <p><a href='{% url 'Customer_Support' %}'>Customer Support</a></p>
+                        <p><a href='{% url 'Tutorials' %}'>Tutorials</a></p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p><b> Legal </b></p>
+                        <p><a href='{% url 'TermsAndCondition' %}'>Terms and Conditions</a></p>
+                        <p><a href='{% url 'PrivacyPolicy' %}'>Privacy Policy</a></p>
+                        <p><a href='{% url 'Disclaimer' %}'>Disclaimer</a></p>
+                        <p><a href='{% url 'RefundPolicy' %}'>Refund Policy</a></p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p><b> Community </b></p>
+                        <p class="text-muted">Blog</p>
+                        <p class="text-muted">Forum</p>
+                        <p class="text-muted">Affiliates</p>
+                    </div>
+
+                </div>
+
+                <br>
+            </div>
+
+            <p align="center">&copy; Powered by Balance Tech Private Limited. UEN 201621074k</p>
+
+
+        </footer>
+
+
+
+<!--   </nav> -->
+
+  </div>
+
+
+
+
+
+        {% else %}
+
+          <div class="container">
+          <small>
+          <div class='col-sm-8 col-sm-offset-2'>
+            <h3>Welcome {{ request.user }}</h3>
+            <b>You are logged in</b>
+
+              <br>
+              <br>
+
+              {% if not request.user.teacher.function and not request.user.student.function and not request.get_full_path == "/teacher/add/" and not request.get_full_path == "/student/add/" and not request.get_full_path == "/termsandconditions/" and not request.get_full_path == "/privacypolicy/" and not request.get_full_path == "/disclaimer/" %}
+
+              <br>
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>Please select below to complete your profile before you can hire/apply.</b></div>
+                <div class="panel-body">
+                  <br>
+                  <a href='{% url "TeacherCreate" %}' data-action='show-spinner' class='buttonspace btn btn-success btn-block' >Tutors click here</a>
+                </div>
+                <div class="panel-body">
+                  <a href='{% url "StudentCreate" %}' data-action='show-spinner' class='buttonspace btn btn-success btn-block' >Students click here</a>
+                </div>
+              </div>
+
+              {% else %}
+
+
+
+              {% block special %}
+
+
+
+
+
+
+
+
+
+
+
+              {% endblock %}
+
+
+              {% endif %}
+          </div>
+          </small>
+          </div>
+
+
+    {% endif %}
+
+
+
+
+  {% endblock %}
+
+
+
+
+
+
+
+   {% include "javascript.html" %}
+
+
+
+
+
+
+
+
+<script>
+
+$(document).ready(function(){
+
+  {% block jquery %}
+  {% endblock %}
+
+  updateMsgCount()
+
+//msg dropdown
+  $('.dropdown-toggle').dropdown()
+  $(".notification-toggle").click(function(e){
+
+    e.preventDefault();
+    $.ajax({
+      type: "POST",
+      url: "{% url 'get_notifications_ajax' %}",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+      },
+
+      success: function(data){
+        $("#notification_dropdown").html(' <li role="presentation" class="dropdown-header"></li>');
+        var count = data.count
+        console.log(count)
+        if (count == 0) {
+          var url = '{% url "notifications_all" %}'
+          $("#notification_dropdown").append("<li><a href='" + url + "'>View All Notifications</a></li>")
+        } else {
+          $(data.notifications).each(function(){
+
+            var link = this;
+
+            $("#notification_dropdown").append("<p id='noti'>" + link + " </p>")
+          })
+        }
+      },
+
+      error: function(rs, e){
+        console.log(rs);
+        console.log(e);
+      }
+    })
+  })
+
+//spinner
+  var overlay = document.getElementById("overlay");
+  window.addEventListener('load', function() {
+    overlay.style.display = 'none';
+  });
+
+  $('body').on('click', 'a[data-action=show-spinner]', function(){
+    $('#overlay').fadeIn(200);
+  });
+
+
+    $(".db-submit").click(function(e){
+    var $submitBtn = $(this);
+    e.preventDefault()
+
+    var msg = $(this).attr("msg");
+
+    $("#dc").fadeIn("300")
+    $("#dc").dialog({
+      resizable: false,
+      height: 200,
+      width: 350,
+      modal: true,
+      show: { effect: 'fade' },
+      hide: { effect: 'fade' },
+      buttons:{
+        1:{
+          id:"close",
+          text:"Confirm",
+          click: function(){
+            console.log("confirm")
+
+              var $form = $submitBtn.parent('.db');
+
+              if ($form && $form.length) {
+                $form.submit();
+              }
+
+            $(this).dialog("close")
+          },
+          class: "buy-btn"
+        },
+        2:{
+          id:"close",
+          text:"Cancel",
+          click: function(){
+            console.log("cancel")
+            $(this).dialog("close")
+          },
+          class: "cancel-btn"
+        }
+      }
+    })
+    })
+
+})
+
+
+//functions
+
+function updateMsgCount(){
+  var badge = $("#msg-count-badge");
+    $.ajax({
+      type: "GET",
+      url: "{% url 'msg_count' %}",
+      success: function(data){
+        badge.text(data.count);
+      },
+      error: function(response, error){
+        console.log(response);
+        console.log(error);
+      }
+    })
+}
+
+function runScrollB() {
+  scrollTo(document.body, 100000, 100);
+}
+var scrollbottom;
+scrollbottom = document.querySelector("#scrollbottom");
+if(scrollbottom){
+  scrollbottom.addEventListener("click",runScrollB,false)
+}
+function runScrollT() {
+  scrollTo(document.body, 0, 100);
+}
+var scrolltop;
+scrolltop = document.querySelector("#scrolltop");
+if(scrolltop){
+  scrolltop.addEventListener("click",runScrollT,false)
+}
+
+function scrollTo(element, to, duration) {
+  if (duration <= 0) return;
+  var difference = to - element.scrollTop;
+  var perTick = difference / duration * 10;
+
+  setTimeout(function() {
+    element.scrollTop = element.scrollTop + perTick;
+    if (element.scrollTop == to) return;
+    scrollTo(element, to, duration - 10);
+  }, 10);
+}
+
+
+function showFlashMessage(message) {
+  var template = "<div class='container container-alert-flash'>" +
+  "<div class='col-sm-10 col-sm-offset-1'> " +
+  "<div class='alert alert-success alert-dismissible' role='alert'>" +
+  "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+  "<span aria-hidden='true'>&times;</span></button>"
+  + message + "</div></div></div>"
+  $("body").append(template);
+  $(".container-alert-flash").fadeIn(500);
+  setTimeout(function(){
+    $(".container-alert-flash").fadeOut(500);
+  }, 5000);
+}
+
+
+
+ </script>
+
+
+
+<!-- The modal section has to be at the very bottom of the site, right before closing body tag -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <div class="embed-responsive embed-responsive-ratio">
+              <video controls id="modalVideo">
+                <source src="{% static 'vid/tutorial.mp4' %}" type="video/mp4">
+                <source src="{% static 'vid/tutorial.mov' %}" type="video/mov">
+              </video>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-md btn-primary" data-dismiss="modal" id="modalClose">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Additional services include image uploading for tutors so they can advertise their accomplishments and/or certificates earned. Tracking to idenfify many views and messages their profiles have over time. And advertising to feature their profiles on top of our search. -->
+
+
+
+
+
+<!--             <div class="row">
+
+              <div class="col-sm-3">
+                <b><p class='lead tacr'>Search for Tutors</p></b>
+                <p>Search from our vast database of tutors and browse their details, documents and reviews to find a tutor who fits your requirements</p>
+              </div>
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Create Tuition Jobs</p>
+                <p>Create tuition jobs and offer your jobs to your favorite tutor or wait for tutors to message you.</p>
+              </div>
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Message your Tutors</p>
+                <p>Track and schedule your tuition sessions with our online messaging system, discuss this price, the dates and verify the tutors expertise with our intergrated messaging system before you hire to avoid giving out your personal contact before hiring.</p>
+              </div>
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Review your Tutor</p>
+                <p>Review your tutors performance when tuition job is completed. You can always negotiate a discount with the tutor should you provide a review.</p>
+              </div>
+
+            </div>
+ -->
+
+
+<!--             <div class="row">
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Search for Tuition Jobs</p>
+
+                <p>Search from our vast database of tuition jobs based on your who fits your ability</p>
+              </div>
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Create/Upload your profile</p>
+                <p>Upload relevant documents showcasing your teaching skills and credentials, or even text messages from students thanking you for the good grades that have obtained under your supervision.</p>
+
+              </div>
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Message your Students</p>
+                <p>Track and schedule your tuition sessions with our online messaging system, discuss the pricing, schedule the dates and verify the tutors expertise with our intergrated messaging system before you hire to avoid giving out your personal contact before hiring.</p>
+              </div>
+
+              <div class="col-sm-3">
+                <p class='lead tacr'>Favourite your Tuition Jobs</p>
+                <p>Found a tuition job that you like but cant make up your mind to apply for that job? Favorite that job and come back later.</p>
+
+              </div>
+
+            </div> -->
+
+
+<!--             We are encouraging the freelance tutor to 
+
+            Do you know that by having good reviews, you get offered higher rates as your reputation improves.
+
+            For Tutors, dont know how to build a website to offer your services? You can upload images of your past reviews or documents of your qualifications in teaching onto your profile to help you acquire students.
+
+            Instead of the middkeman we let you negotiate direct with the students on this platform
+
+            We provide analytics such as views and favorites on your profile so you can optimise your profile as you progress. -->
+
+
+
+
+
+  </body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+	<div class="panel panel-default">
+  	<div class="panel-heading"><h4 class="panel-title"><b>Subscribe to including image/documents in your profile</b></h4></div>
+	  <div class="panel-body">
+
+	{% if user.is_authenticated %}
+
+		<b>You currently have {{ usercred }} user credits in your account.<b>
+
+		<br>
+		<br>
+
+		<div class="panel panel-default">
+		<div class="panel-body">
+
+		<b>Please select the number of days to display image/document in your profile<b>
+
+		<br>
+		<br>
+		
+		<form method='POST' action=''>{% csrf_token %}
+			{% crispy form %}
+		</form>
+
+		</div>
+		</div>
+
+		<a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+
+		
+	{% else %}
+
+		<h2>Please register first. Thank you.</h2>
+		<a href='{% url 'account_signup' %}' class='btn btn-success' >Sign up</a>
+
+	{% endif %}
+
+	  </div>
+	</div>
+
+{% endblock %}
+
+

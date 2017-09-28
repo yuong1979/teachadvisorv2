@@ -1,0 +1,435 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.square {
+    height: 100px;
+    width: 100px;
+}
+
+.img {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.img1 {
+	max-height: 230px;
+	max-width: 230px;
+	margin: 10px;
+}
+.img2 {
+	max-height: 230px;
+	max-width: 230px;
+	margin: 10px;
+}
+.img3 {
+	max-height: 230px;
+	max-width: 230px;
+	margin: 10px;
+}
+.img4 {
+	max-height: 230px;
+	max-width: 230px;
+	margin: 10px;
+}
+.img5 {
+	max-height: 230px;
+	max-width: 230px;
+	margin: 10px;
+}
+.img6 {
+	max-height: 230px;
+	max-width: 230px;
+	margin: 10px;
+}
+
+.enlarged {
+  max-height: 100%;
+  max-width: 98%;
+  display: block;
+  padding: 5px;
+  margin: 0 auto;
+
+}
+
+.hide {
+  max-height: 0px;
+  max-width: 0px;
+}
+
+
+
+{% endblock %}
+</style>
+
+
+
+
+{% block special %}
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Tutor Details</b></h4></div>
+<div class="panel-body">
+
+
+
+{% if object %}
+
+<div class="panel panel-default col-xs-8 col-sm-10">
+<!--   <div class="panel-heading"><h4 class="panel-title"><b>{{ object.last_name }} {{ object.first_name }}</b></h4></div> -->
+  <div class="panel-body">
+    <h5><b>{{ object.last_name }} {{ object.first_name }}: {{ object.title }}</b></h5>
+  </div>
+</div>
+
+<div class="col-xs-4 col-sm-2">
+	<div class="square">
+		{% if object.image %}
+		<img id='img' src='{{ object.image.url }}' />
+		{% else %}
+		<img id='img' src='{% static "img/anonymous.jpg" %}' />
+		{% endif %}
+	</div>
+</div>
+
+<div class='row'></div>
+
+<!-- 	<div class="panel panel-default">
+	  <div class="panel-heading"><b>Personel Details</b></div>
+	  <ul class="list-group">
+	    <li class="list-group-item">&nbsp;<b>Tutor name:</b> {{ object.user.username }}</li>
+	    <li class="list-group-item">&nbsp;<b>Gender:</b> {{ object.gender }}</li>
+	  </ul>
+	</div> -->
+
+	<div class="panel panel-default">
+	<div class="panel-heading"><b>Analytics</b></div>
+		<ul class="list-group">
+
+		<li class="list-group-item">Tutor has an average rating of <b>{{ score }}/5.0</b> over <b>{{ jobs }}</b> tuition jobs</li>
+
+		<li class="list-group-item">
+			{% if last_active %}
+			Tutor last delivered job at <b>{{ last_active }}</b>
+			{% else %}
+			Tutor hasn't completed any jobs yet
+			{% endif %}
+		</li>
+
+		<li class="list-group-item">Tutor Profile Viewed <b>{{ viewteacher }}</b> Times and Favorited <b>{{ favteacher }}</b> Times</li>
+
+		<li class="list-group-item">
+		<form action='{% url "ReviewList" %}' data-action='show-spinner' method="get">
+			<input type="hidden" name="teacher_id" value="{{ object.id }}"/>
+			<input class='btn btn-primary buttonspace' type="submit" value="View Tutor Reviews">
+		</form>
+		</li>
+
+		</ul>
+	</div>
+
+	<div class="panel panel-default">
+
+	  <div class="panel-heading">
+	  	<b>Teaching Proficiency</b>
+	  </div>
+
+	  <div class="panel-body">
+
+
+
+		<div class="panel panel-default">
+		<div class="panel-heading"><b>Primary Subject Specialization:</b> {{ object.first_subject }}</div>
+		<div class="panel-body">
+		<p>
+		<b>For Levels:</b>
+		{% for i in object.first_level.all %}
+		{{ i }},
+		{% endfor %}
+		</p>
+		</div>
+		</div>
+
+
+		<div class="panel panel-default">
+		<div class="panel-heading"><b>Secondary Subject Specialization:</b> {{ object.second_subject }}</div>
+		<div class="panel-body">
+		<p>
+		<b>For Levels:</b>
+		{% for i in object.second_level.all %}
+		{{ i }},
+		{% endfor %}
+		</p>
+		</div>
+		</div>
+
+		<div class="panel panel-default">
+		<div class="panel-heading"><b>Other Subject Specialization:</b> {{ object.third_subject }}</div>
+		<div class="panel-body">
+	  	<p>
+		<b>For Levels:</b>
+		{% for i in object.third_level.all %}
+		{{ i }},
+		{% endfor %}
+		</p>
+		</div>
+		</div>
+
+
+	  </div>
+
+	</div>
+
+
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Teaching Experience and Qualifications</b></div>
+		<ul class="list-group">
+
+		<li class="list-group-item">&nbsp;<b>Degree:</b>
+			{% for i in object.educational_level.all %}
+			{{ i }},
+			{% endfor %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Courses taken:</b>
+			{% for i in object.education.all %}
+			{{ i }},
+			{% endfor %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Educational Institutes:</b>
+			{% for i in object.education_school.all %}
+			{{ i }},
+			{% endfor %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Current Status:</b>
+			{{ object.expertise_type }}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Teaching Experience:</b>
+			{% if object.years_of_experience %}
+			{{ object.years_of_experience }} Years
+			{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Website:</b>
+			{% if object.website_url %}
+				<a href="{{ object.website_url }}">{{ object.website_url }}</a>
+			{% else %}
+				None
+			{% endif %}
+		</li>
+
+<!-- 		<li class="list-group-item">&nbsp;<b>Skills:</b>
+			{% if tags %}
+				{% for i in tags %}
+				{{ i }},
+				{% endfor %}
+			{% else %}
+				None
+			{% endif %}
+		</li> -->
+
+		<li class="list-group-item">&nbsp;<b>About myself:</b>
+			{{ object.description|linebreaks }}
+		</li>
+
+
+		</ul>
+	</div>
+
+
+	<div class="panel panel-default">
+	  <div class="panel-heading"><b>Other Details</b></div>
+	  <ul class="list-group">
+
+		<li class="list-group-item">&nbsp;<b>Asking Salary/Hour:</b>
+			{% if object.salary_expectation %}
+			${{ object.salary_expectation }}/Hour
+			{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Negotiable:</b>
+			{% if object.salary_negotiable == False %}No{%else%}Yes{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Provide Group Tuition:</b>
+			{% if object.group_tuition == False %}No{%else%}Yes{% endif %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Preferred Locations:</b> 
+			{% for i in object.region.all %}
+			{{ i }},
+			{% endfor %}
+		</li>
+
+		<li class="list-group-item">&nbsp;<b>Currently Active:</b> 
+			{% if object.active == False %}No{%else%}Yes{% endif %}
+
+		</li>
+
+	  </ul>
+	</div>
+
+
+
+
+<!-- 	<b>Supporting Documents:</b> -->
+	<br>
+
+
+
+
+	<div class="panel panel-default">
+	  <div class="panel-heading"><b>Supporting Documents:</b></div>
+
+	  	{% if object.doc1 %}
+		<img class='img1' src='{{ object.doc1.url }}' />
+		<br><small class='img1'>{{ object.doc1description }}</small><br>
+		{% endif %}
+
+		{% if object.doc2 %}
+		<img class='img2' src='{{ object.doc2.url }}' />
+		<br><small class='img2'>{{ object.doc2description }}</small><br>
+		{% endif %}
+
+		{% if object.doc3 %}
+		<img class='img3' src='{{ object.doc3.url }}' />
+		<br><small class='img3'>{{ object.doc3description }}</small><br>
+		{% endif %}
+
+		{% if object.doc4 %}
+		<img class='img4' src='{{ object.doc4.url }}' />
+		<br><small class='img4'>{{ object.doc4description }}</small><br>
+		{% endif %}
+
+		{% if object.doc5 %}
+		<img class='img5' src='{{ object.doc5.url }}' />
+		<br><small class='img5'>{{ object.doc5description }}</small><br>
+		{% endif %}
+
+		{% if object.doc6 %}
+		<img class='img6' src='{{ object.doc6.url }}' />
+		<br><small class='img6'>{{ object.doc6description }}</small><br>
+		{% endif %}
+
+	</div>
+
+<!-- This commented below used to be surrounding the supporting documents but because commenting out does not work on sublime thats why its moved below. -->
+<!-- 	{% if imagepaid == True %} -->
+<!-- 	{% endif %} -->
+
+
+	{% if request.user.is_authenticated %}
+		{% if request.user == object.user %}
+		<a href='{{ object.get_update }}' class='btn btn-success buttonspace' >Edit Details</a>
+		<a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+		{% endif %}
+
+		{% if request.user.student.function and request.user != object.user %}
+		<a href='{% url "OpeningSelectMsg" %}' data-action='show-spinner' class='btn btn-success buttonspace' >Message</a>
+
+		<form action='FavTeacherSub' method="post" style="display: inline">{% csrf_token %}
+		<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value={{Submit}}>
+		</form>
+		<a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+
+		{% endif %}
+	{% else %}
+		<small>Please register to to send messages</small>
+	{% endif %}
+
+
+{% endif %}
+
+
+</div>
+</div>
+
+	{% if object.trial_acc == True %}
+	<small><p class='pull-right'>Account Type:Trial</p></small>
+	{% else %}
+	{% endif %}
+
+{% endblock %}
+
+
+
+<script>
+{% block jquery %}
+
+$(document).ready(function(){
+
+        $(".img1").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+        });
+        $(".img2").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+        });
+        $(".img3").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+        });
+        $(".img4").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+        });
+        $(".img5").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img6").toggleClass('hide');
+        });
+        $(".img6").click(function() {
+            $(this).toggleClass('enlarged');
+            $(".img1").toggleClass('hide');
+            $(".img2").toggleClass('hide');
+            $(".img3").toggleClass('hide');
+            $(".img4").toggleClass('hide');
+            $(".img5").toggleClass('hide');
+        });
+});
+
+{% endblock %}
+</script>
+
+

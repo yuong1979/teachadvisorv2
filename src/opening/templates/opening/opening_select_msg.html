@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+
+table {
+    border-collapse: collapse;
+/*    border: 1px solid #ddd;*/
+	margin: 1px, 1px, 1px, 1px,;
+	height: 40px;
+	width: 100%;
+	table-layout: fixed;
+    vertical-align: bottom;
+/*    border-bottom: 1px solid #ddd;*/
+/*    text-align: center;*/
+/*    text-align: right;*/
+}
+
+
+
+{% endblock %}
+</style>
+
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 class="panel-title msgtitle"><b>Your Active Openings</b></h2>
+</div>
+<div class="panel-body">
+
+<div class='col-sm-2'></div>
+
+	<div class='col-sm-10'>
+	{% if openings_list %}
+
+		<p><b>Please select an opening to message the teacher about</b></hp>
+		<br>
+		<br>
+		
+		{% for i in openings_list %}
+			<table>
+				<tr>
+					<td>
+						<b>{{i}}</b> &nbsp &nbsp
+
+						<form action='Oselectmsgc' method="post" style="display: inline">{% csrf_token %}
+						<input type="hidden" name="opening_id" value="{{i.id}}">
+						<input class='btn btn-success' type="submit" value="Select">
+						</form>
+
+					</td>
+				</tr>
+			</table>
+		{% endfor %}
+
+	{% else %}
+
+		<b>Please create at least one job opening if you want contact a teacher</b>
+		<br>
+		<a href='{% url "OpeningCreate" %}' data-action='show-spinner' class='btn btn-success buttonspace btn-block' >Create New Opening</a>	
+
+	{% endif %}
+	</div>
+	
+<div class='col-sm-2'></div>
+
+</div>
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

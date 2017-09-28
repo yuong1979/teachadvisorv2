@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+    background-color:#155A1E;
+    color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+    <div class="panel panel-default">
+    <div class="panel-heading"><h4 class="panel-title"><b>Credit Purchases</b></h4></div>
+      <div class="panel-body">
+
+    {% if user.is_authenticated %}
+
+        <b>You are now paying {{ creditcostdollars }} dollars for {{ credit }} credits to be added to your account.<b>
+
+        <br><br>
+
+
+        <form action="/checkout" method="POST">{% csrf_token %}
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key={{stripe_key}}
+            data-amount={{ creditcostcents }}
+            data-name="TeachAdvisor"
+            data-description="Payment"
+            data-image="https://s3-ap-southeast-1.amazonaws.com/www.teach-advisor.com/NEW+LOGO+2.png"
+            data-locale="auto"
+            data-currency="sgd">
+          </script>
+        </form>
+
+        <br>
+
+        <a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+
+        
+    {% else %}
+
+        <h2>Please register first. Thank you.</h2>
+        <a href='{% url 'account_signup' %}' class='btn btn-success' >Sign up</a>
+
+    {% endif %}
+
+      </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+<!-- {% crispy search_form %} -->
+{% load staticfiles %}
+
+
+
+{% block content %}
+
+<script>
+  window.onload = function() {
+    $( "#div_id_subject_1 label" ).on( "click", function() {
+      $( "#div_id_subject_2 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+      $( "#div_id_subject_3 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+    });
+    $( "#div_id_subject_2 label" ).on( "click", function() {
+      $( "#div_id_subject_1 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+      $( "#div_id_subject_3 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+    });
+    $( "#div_id_subject_3 label" ).on( "click", function() {
+      $( "#div_id_subject_1 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+      $( "#div_id_subject_2 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+    });
+  };
+</script>
+
+<div class="panel-group" id="accordion">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><b>Search for Tuition Jobs</b></a>
+        </h4>
+      </div>
+        <div class="panel-body">
+
+        {% crispy form %}
+
+      </div>
+      </div>
+</div> 
+
+
+
+<br>
+
+
+
+
+
+
+
+
+{% if object_list %}
+
+{% for i in object_list %}
+
+<div class="col-sm-6 col-md-3">
+
+    <div class="thumbnail">
+      <div class="caption">
+
+          <h5><b><a href='{{i.get_absolute_url }}'>{{ i.title|truncatechars:24 }}</a></b></h5>
+
+          <p><b>Subject:</b> {{ i.subject }}</p>
+
+          <p><b>Level:</b> {{ i.level }}</p>
+
+          <p>
+          <b>Offering:</b>
+          {% if i.salary_range != None %}
+          ${{ i.salary_range }}/Hour
+          {% endif %}
+          </p>
+
+          <p><b>Location:</b> {{ i.region }}</p>
+
+<!--          <p><b>Favorited:</b>
+          {% if i.i.favopening.teacher.all.count %}
+          {{ i.i.favopening.teacher.all.count }} Times
+          {% else %}
+          0 Times
+          {% endif %}
+          </p> -->
+
+    </div>
+    </div>
+
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+There are no results matching your query
+
+{% endif %}
+
+
+<div class="row"></div>
+
+
+{% if page_obj.has_previous %}
+  <a href='{% url "OpeningList" %}?page={{ page_obj.previous_page_number }}'>Previous</a>
+{% endif %}
+Page {{ page_obj.number }} of {{ paginator.num_pages }}
+{% if page_obj.has_next %}
+  <a href='{% url "OpeningList" %}?page={{ page_obj.next_page_number }}'>Next</a>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+<!-- <table class="table">
+
+<b>
+
+<td><b>Name</b></td>
+<td><b>Email</b></td>
+<td><b>Fincode</b></td>
+<td><b>Contact</b></td>
+<td><b>Description</b></td>
+</b>
+
+{% for i in object_list %}
+
+<tr>
+
+<td>{{ i.name }}</td>
+<td>{{ i.email }}</td>
+<td>{{ i.fincode }}</td>
+<td>{{ i.contact }}</td>
+<td>{{ i.description|truncatechars:10 }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table> -->

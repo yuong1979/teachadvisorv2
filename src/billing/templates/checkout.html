@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+<script>
+{% block jquery %}
+
+var clientToken = "{{ client_token }}";
+
+console.log(clientToken)
+
+braintree.setup(clientToken, "dropin",{
+	container: "payment-form"
+})
+
+
+
+
+
+
+{% endblock %}
+</script>
+
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+	<div class="panel panel-default">
+  	<div class="panel-heading"><h4 class="panel-title"><b>Credit purchase</b></h4></div>
+	  <div class="panel-body">
+
+	{% if user.is_authenticated %}
+	<b>Please confirm that your purchase of {{credit}} credits for {{creditcost}} dollars.<b>
+
+	<br>
+
+	<p>By proceeding with this transaction you have read and agree with our <a href='/refundpolicy/' >Refund Policy</a>.</p>
+
+
+		
+		<div class="panel panel-default">
+		<div class="panel-body">
+
+		<form id = "checkout" method='POST' action="{% url 'CheckOutFinal' %}">{% csrf_token %}
+		<div id="payment-form"></div>
+		&nbsp;
+
+		<input class='btn btn-success buttonspace' data-action='show-spinner' type="submit" value="Complete Order">
+
+		</form>
+
+
+
+
+		</div>
+		</div>
+
+		
+	{% else %}
+
+		<h2>Please register first. Thank you.</h2>
+		<a href='{% url 'account_signup' %}' class='btn btn-success' >Sign up</a>
+
+	{% endif %}
+
+	  </div>
+	</div>
+
+{% endblock %}
+
+

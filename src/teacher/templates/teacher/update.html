@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+	<div class="panel panel-default">
+  	<div class="panel-heading"><h4 class="panel-title"><b>Tutor Profile</b></h4></div>
+	  <div class="panel-body">
+
+	{% if user.is_authenticated %}
+
+		<form method='POST' action="" enctype='multipart/form-data'>{% csrf_token %}
+		{% crispy form %}
+		</form>
+
+	{% else %}
+
+		<h2>Please register first. Thank you.</h2>
+		<a href='{% url 'account_signup' %}' class='btn btn-success buttonspace' >Sign up</a>
+
+	{% endif %}
+
+	  </div>
+	</div>
+
+{% endblock %}
+
+
+

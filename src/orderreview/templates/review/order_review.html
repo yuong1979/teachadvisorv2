@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block additional_links %}
+     {{ block.super }}
+     {% if additionjs %}
+         <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+         <link rel="stylesheet" href="{% static 'css/fontawesome-stars.css' %}">
+         <script type="text/javascript" src="{% static 'js/jquery.barrating.min.js' %}"></script>
+         <script>
+         window.onload = function() {
+             $.getScript('/static/js/jquery.barrating.min.js', function()
+             {
+               $('#id_score').barrating({
+                 theme: 'fontawesome-stars'
+               });
+               $('#id_score').barrating('set', 3);
+                 });
+         };
+         </script>
+     {% endif %}
+ {% endblock %}
+ 
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+	<div class="panel panel-default">
+	<div class="panel-heading"><h4 class="panel-title"><b>{{ title }}</b></h4></div>
+	  <div class="panel-body">
+
+		<br>
+		{% crispy form %}
+
+	  </div>
+	</div>
+
+{% endblock %}
+
+
+
+
+

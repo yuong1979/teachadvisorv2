@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+<style>
+
+    {% block style %}
+        .thumbnail {
+            height: 320px;
+            background-color: #FFFFFF;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .thumbnail img {
+            width: 100%;
+            height: 180px;
+
+        }
+
+        .caption h4 {
+            overflow: hidden;
+        }
+{##}
+{#        .caption p {#}
+{#            height: 20px;#}
+{#        }#}
+
+        .form-control-clear {
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+
+
+    {% endblock %}
+
+</style>
+
+{% block head_title %}
+    TeachAdviser Blog
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="container">
+        <br>
+        <div class="row">
+            <form method='GET' action=''>
+                <div class='col-sm-4'>
+                    <div class='input-group'>
+                        <div class="form-group has-feedback has-clear">
+                            <input class='form-control' type='text' name='q' placeholder='Search posts'
+                                   value='{{ request.GET.q }}'/>
+                            <span class="form-control-clear form-control-feedback hidden"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+                        </div>
+                        <span class='input-group-btn'>
+                    <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+                    <button class='btn btn-default' type='submit'>Search <i class="fa fa-search"></i></button>
+                </span>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <br>
+
+<!--         <h2 align="center">Posts</h2> -->
+
+
+        <br>
+
+
+
+        {% for object in object_list %}
+            {% if forloop.first %}
+                <div class="row">{% endif %}
+        <div class="col-sm-4">
+            <div class="thumbnail">
+
+                <img src="{{ object.image.url }}" alt="blog image">
+                <div class="caption">
+                    <h4><a href="{% url 'blog_detail' object.slug %}">{{ object.title }}</a></h4>
+
+
+                    <p>Posted: {{ object.created_at.date }}</p>
+
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}</div>
+            <br><br>
+            <div class="row">{% endif %}
+        {% if forloop.last %}</div>{% endif %}
+
+        {% endfor %}
+
+        <div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?page={{ object_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+        </div>
+        <br><br>
+
+    </div>
+
+
+
+
+
+{% endblock %}
+
+{#
+1. Row and container to be optimized.
+2. Image fixed size for all blog post.
+3. limited title text in color.
+#}
+
+
+<script>
+    {% block jquery %}
+        $('.has-clear input[type="text"]').on('input propertychange', function () {
+            var $this = $(this);
+            var visible = Boolean($this.val());
+            $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+        }).trigger('propertychange');
+
+        $('.form-control-clear').click(function () {
+            $(this).siblings('input[type="text"]').val('')
+                .trigger('propertychange').focus();
+        });
+    {% endblock %}
+</script>

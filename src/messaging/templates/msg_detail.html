@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+
+.grey {
+  background-color:#f5f5f5;
+
+}
+
+
+{% endblock %}
+</style>
+
+
+
+{% block special %}
+
+<!-- <button id=scrollbottom type="button">To the bottom</button> -->
+
+
+
+
+
+<font size="2.5">
+
+</font>
+
+
+{% for i in mainmessage %}
+
+<div class="panel panel-default">
+
+<div class="panel-heading"><h4 class="panel-title"><b>Regarding: {{ i.title }}</b></h4></div>
+<!-- <div class="panel-heading"><h4 class="panel-title"><b><a href='{{ obj.get_absolute_url }}' role="button">Opening: {{ i.re_opening }}</a></b></h4></div> -->
+<div class="panel-body">
+
+
+	{% if i.senduser != request.user %}
+	
+   		{% include "msg_detail_ext.html" %}
+
+	{% else %}
+
+   		{% include "msg_detail_ext.html" %}
+
+	{% endif %}
+
+
+{% endfor %}
+
+
+{% for i in message %}
+
+	{% if i.senduser != request.user %}
+
+   		{% include "msg_detail_ext.html" %}
+
+	{% else %}
+
+   		{% include "msg_detail_ext.html" %}
+
+	{% endif %}
+
+{% endfor %}
+
+
+
+<!-- {{form.media}} -->
+
+<div class="panel panel-default">
+<div class="panel-body grey">
+<form method="post" action="." enctype="multipart/form-data" > {% csrf_token %}
+{{ form|crispy }}
+<input type='submit' value="{{ submit_btn_value }}" name="form" class='buttonspace btn btn-success'>
+</form>
+</div>
+</div>
+
+
+<div class="center">
+
+{% if request.user.teacher %}
+
+<form action='appoffconf' method="post" style="display: inline">{% csrf_token %}
+<input type="hidden" name="msg_id" value="{{object.id}}">
+<input class='buttonspace btn btn-success' type="submit" value="Apply for Opening">
+</form>
+{% endif %}
+
+{% if request.user.student %}
+
+<form action='appoffconf' method="post" style="display: inline">{% csrf_token %}
+<input type="hidden" name="msg_id" value="{{object.id}}">
+<input class='buttonspace btn btn-success' type="submit" value="Offer Opening">
+</form>
+{% endif %}
+
+<a href='{{ obj.get_absolute_url }}' class="buttonspace btn btn-primary" role="button">View {{ modelobj }}</a>
+
+<a href='{% url 'MessageListViewAll' %}' class="buttonspace btn btn-primary" role="button">Message List</a>
+
+<!-- <form action='rejectmsg' method="get" style="display: inline">
+<input type="hidden" name="msg_id" value="{{ object.parent_id }}"/>
+<input class='buttonspace btn btn-danger' type="submit" value="Reject and Block">
+</form> -->
+
+
+<form action='blocksub' method="get" style="display: inline">
+<input type="hidden" name="msg_id" value="{{ object.parent_id }}"/>
+<input class='buttonspace btn btn-danger' type="submit" value= {{blocker}} >
+</form>
+
+
+</div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+<script>
+
+// runScrollB()
+
+// function runScrollB() {
+//   scrollTo(document.body, 100000, 100);
+// }
+// var scrollbottom;
+// scrollbottom = document.querySelector("#scrollbottom");
+// if(scrollbottom){
+//   scrollbottom.addEventListener("click",runScrollB,false)
+// }
+// function runScrollT() {
+//   scrollTo(document.body, 0, 100);
+// }
+// var scrolltop;
+// scrolltop = document.querySelector("#scrolltop");
+// if(scrolltop){
+//   scrolltop.addEventListener("click",runScrollT,false)
+// }
+
+// function scrollTo(element, to, duration) {
+//   if (duration <= 0) return;
+//   var difference = to - element.scrollTop;
+//   var perTick = difference / duration * 10;
+
+//   setTimeout(function() {
+//     element.scrollTop = element.scrollTop + perTick;
+//     if (element.scrollTop == to) return;
+//     scrollTo(element, to, duration - 10);
+//   }, 10);
+// }
+
+</script>
+
+
+
+{% endblock %}
+
+
+

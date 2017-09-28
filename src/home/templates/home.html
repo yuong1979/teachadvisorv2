@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block meta %}
+     <meta name="title" content="Best Online Tuition Agency in Singapore – Tech Advisor">
+     <meta name="description" content="Teach Advisor is the leading online tuition portal & agency in Singapore where tutors meet students to clear the academic doubts. Experience online tutoring like never before!">
+     <meta name="keywords" content="best tuition centre in Singapore, tuition teacher Singapore, best tuition in Singapore, best tuition agency Singapore, home tuition agency Singapore, home tuition Singapore, tuition agency Singapore, private home tuition Singapore, online tuition portal Singapore, top tuition agency in Singapore">
+ {% endblock %}
+ 
+ {% block head_title %}Best Online Tuition Agency in Singapore – Tech Advisor{% endblock %}
+ 
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+
+
+.buttonspace1 {
+  width:120px;
+
+}
+
+
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Your Dashboard </b></h4></div>
+<div class="panel-body center"><br>
+
+
+    {% if request.user.teacher.function %}
+
+    <div class='col-sm-6'>
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading"><h4 class="panel-title"><b>Profile Activity  </b><i class="fa fa-line-chart fa-x"></i></h4></div>
+			  <div class="panel-body">
+
+          <b>Profile Favorited: {{comp_fav_count}} times</b>
+          <br><br>
+          <b>No. of views: {{nucomp_view_count}} times</b>
+          <br><br>
+			  	<b>Students who have viewed your profile: {{comp_view_count}}</b>
+			  	<br>
+			  	<br>
+
+<!-- Analytics subscription -->
+<!--           {% if analenddate != "Expired" %} -->
+          <p><a href='{% url "TeacherChart" %}' data-action='show-spinner' class='btn btn-primary buttonspace' > View Analytics <i class="fa fa-bar-chart fa-x"></i></a></p>
+<!--           {% endif %} -->
+
+			</div>
+			</div>
+    </div>
+
+
+    <div class='col-sm-6'>
+			<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading"><h4 class="panel-title"><b>Quick Links  </b><i class="fa fa-link fa-x"></i></h4></div>
+			  <div class="panel-body center">
+			    <a href='{% url "MessageListViewAll" %}' data-action='show-spinner' class='btn btn-primary buttonspace' >Messages  <i class="fa fa-envelope fa-x"></i></a>
+			    <a href='{{ request.user.teacher.get_absolute_url }}' data-action='show-spinner' class='btn btn-primary buttonspace' >Personal Details  <i class="fa fa-user fa-x"></i></a>
+			    <a href='{% url "FavOpeningList" %}' data-action='show-spinner' class='btn btn-primary buttonspace' > Favorite Openings  <i class="fa fa-flag fa-x"></i></a>
+			  </div>
+
+			</div>
+    </div>
+
+
+<div class='row'></div>
+
+        <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><h4 class="panel-title"><b>Account Subscription Details</b></h4></div>
+        <div class="panel-body"><br>
+
+<!--         braintree -->
+<!--           <div class='col-sm-6'>
+          <div class="panel panel-default">
+            <div class="panel-heading"><b>You currently have {{credits}} credits</b></div>
+            <div class="panel-body center">
+              <p><a href='' data-action='show-spinner' class='buttonspace1 btn btn-primary' >Add Credits  <i class="fa fa-usd fa-x"></i></a></p>
+            </div>
+          </div>
+          </div> -->
+
+<!--         stripe -->
+          <div class='col-sm-6'>
+          <div class="panel panel-default">
+            <div class="panel-heading"><b>You currently have {{credits}} credits</b></div>
+            <div class="panel-body center">
+              <p><a href='{% url "NewAddCredits" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary' >Add Credits  <i class="fa fa-usd fa-x"></i></a></p>
+            </div>
+          </div>
+          </div>
+
+
+<!--           {% if imgenddate == "Expired" %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>You are not subscribed to content management</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "ImageSub" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+              </div>
+          {% else %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>Your content management subscription ends {{imgenddate}}</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "ImageSub" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary disabled' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+              </div>
+          {% endif %} -->
+
+<!-- Analytics subscription -->
+<!--           {% if analenddate == "Expired" %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>You are not subscribed to analytics</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "AnalyticsSub" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+              </div>
+          {% else %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>Your analytics subscription ends {{analenddate}}</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "AnalyticsSub" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary disabled' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+              </div>
+          {% endif %} -->
+
+
+
+          {% if featenddate == "Expired" %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>You are not subscribed to advertising</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "FeatureSub" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <div class='col-sm-12'>            
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>Your advertising subscription ends on {{featenddate}}</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "FeatureSub" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary disabled' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+        </div>
+        </div>
+
+    {% endif %}
+
+
+    {% if request.user.student.function %}
+
+    				<div class="panel panel-default">
+
+              <div class="panel-heading"><h4 class="panel-title"><b>Quick Links  </b><i class="fa fa-link fa-x"></i></h4></div>
+
+              <div class="panel-body center">
+
+                <a href='{% url "MessageListViewAll" %}' data-action='show-spinner' class='btn btn-primary buttonspace' >Messages  <i class="fa fa-envelope fa-x"></i></a>
+
+                <a href='{{ request.user.student.get_absolute_url }}' data-action='show-spinner' class='btn btn-primary buttonspace' >Personal Details  <i class="fa fa-user fa-x"></i></a>
+
+                <a href='{% url "FavTeacherList" %}' data-action='show-spinner' class='btn btn-primary buttonspace' > Favorite Tutors  <i class="fa fa-flag fa-x"></i></a>
+
+<!--                 {% if analenddate != "Expired" %}
+                <a href='{% url "StudentChart" %}' data-action='show-spinner' class='btn btn-primary buttonspace' > View Analytics <i class="fa fa-bar-chart fa-x"></i></a>
+                {% endif %}
+ -->
+              </div>
+            </div>
+
+
+            <div class="panel panel-default">
+
+              <div class="panel-heading"><h4 class="panel-title"><b>Your Tuition Jobs  </b><i class="fa fa-pencil fa-x"></i></h4></div>
+
+              <div class="panel-body center">
+
+              <a href='{% url "POpeningList" %}' data-action='show-spinner' class='btn btn-primary buttonspace' >Tuition Jobs</a>
+
+              <a href='{% url "OpeningCreate" %}' data-action='show-spinner' class='btn btn-success buttonspace' >Create a New Tuition Job</a>
+
+              </div>
+            </div>
+
+
+
+
+          <div class='col-sm-12'>
+          <div class="panel panel-default">
+            <div class="panel-heading"><b>You currently have {{credits}} credits</b></div>
+            <div class="panel-body center">
+              <p><a href='{% url "NewAddCredits" %}' data-action='show-spinner' class='buttonspace1 btn btn-primary' >Add Credits  <i class="fa fa-usd fa-x"></i></a></p>
+            </div>
+          </div>
+          </div>
+
+<!--           {% if bienddate == "Expired" %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>You are not subscribed to analytics</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "StudentBISub" %}' data-action='show-spinner' class='btn btn-primary buttonspace' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+              </div>
+          {% else %}
+            <div class='col-sm-6'>
+              <div class="panel panel-default">
+                <div class="panel-heading"><b>Your analytics subscription ends {{bienddate}}</b></div>
+                <div class="panel-body center">
+                  <p><a href='{% url "StudentBISub" %}' data-action='show-spinner' class='btn btn-primary buttonspace disabled' > Subscribe <i class="fa fa-check-square-o fa-x"></i></a></p>
+                </div>
+              </div>
+              </div>
+          {% endif %} -->
+
+
+
+
+    {% endif %}
+
+
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+{% include 'footer.html' %}
+
+
+
+{% endblock %}
+
+
+
+
+

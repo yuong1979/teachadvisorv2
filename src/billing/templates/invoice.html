@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+	<div class="panel panel-default">
+  	<div class="panel-heading"><h4 class="panel-title"><b>Purchase Invoice</b></h4></div>
+	  <div class="panel-body">
+
+	{% if user.is_authenticated %}
+
+		<b>You now have {{ currentcredit }} credits in your account.</b>
+
+		<br>
+
+		<div class="panel panel-default">
+		<div class="panel-body">	
+
+
+<!-- 			<b>Your Invoice</b> -->
+			<br>
+			<b>UserName:</b> {{ user }}
+			<br>
+			<br>
+			<b>Transaction ID:</b> {{ transaction_id }}
+			<br>
+			<br>
+			<b>Payment Amount:</b> ${{ price }}
+			<br>
+			<br>
+			<b>No. of credits purchased:</b> {{ creditpurchased }} Credits
+			<br>
+			<br>
+			<b>Date and Time:</b> {{ timestamp }}
+			<br>
+			<br>
+
+			<small>Please print/save this for your own records<small>
+
+			<br>
+			<br>
+
+			<a href='{% url 'Home' %}' class='buttonspace btn btn-primary' >Home</a>
+
+		</div>
+		</div>
+
+		
+	{% else %}
+
+		<h2>Please register first. Thank you.</h2>
+		<a href='{% url 'account_signup' %}' class='btn btn-success' >Sign up</a>
+
+	{% endif %}
+
+	  </div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin*
+ 
+Host: http://www.teach-advisor.com/
+Sitemap: http://www.teach-advisor.com/sitemap.xml

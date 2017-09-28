@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+
+{% block additional_links %}
+ {{ block.super }}
+ {% if additionjs %}
+     <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+     <link rel="stylesheet" href="{% static 'js/fontawesome-stars.css' %}">
+     <script type="text/javascript" src="{% static 'js/jquery.barrating.min.js' %}"></script>
+     <script>
+     window.onload = function() {
+         $.getScript('/static/js/jquery.barrating.min.js', function()
+         {
+           $('#id_score').barrating({
+             theme: 'fontawesome-stars'
+           });
+           $('#id_score').barrating('set', 3);
+             });
+     };
+     </script>
+ {% endif %}
+{% endblock %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+
+}*/
+{% endblock %}
+</style>
+
+{% block special %}
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<h4 class="panel-title"><b>Review</b></h4>
+</div>
+<div class="panel-body">
+
+	<div class="panel panel-default">
+	<div class="panel-heading">
+	<h5><b>Review: {{review.opening}}</b></h5>
+	</div>
+	<div class="panel-body">
+
+			<div class='col-sm-4'>
+				<p><b>Details:</b></p>
+				<div class="panel panel-default">
+				<div class="panel-body">
+
+				<p><b>Subject:</b> {{review.subject}}</p>
+				<p><b>Level:</b> {{review.level}}</p>
+
+				<p>
+				<b>Grp Tuition:</b>
+				{% if review.group_tuition == True %}
+				Yes
+				{% else %}
+				No
+				{% endif %}
+				</p>
+
+				<p><b>Rate:</b> ${{review.price}}/Hour</p>
+				<p><b>Score:</b> {{review.get_rscore}}/5.0</p>
+				<p><b>Grades Before:</b> {{review.gradebefore}}</p>
+				<p><b>Grades After:</b> {{review.gradeafter}}</p>
+				</div>
+				</div>
+			</div>
+
+			
+			<div class='col-sm-8'>
+
+			<p><b>Feedback:</b></p>
+			<div class="panel panel-default">
+				<div class="panel-body">
+				<p> {{review.review}}</p>
+
+				</div>
+			</div>
+
+			<p><b>Teacher Comment:</b></p>
+			<div class="panel panel-default">
+				<div class="panel-body">
+
+				<p> {{review.reviewcomment}}</p>
+				</div>
+			</div>
+			</div>
+
+
+
+		<div class="row"></div><br>
+
+			{% if not review.reviewcomment %}
+			{% if request.user == review.teacher.user %}
+			{% crispy form %}
+			{% endif %}
+			{% endif %}
+
+
+
+	</div>
+	</div>
+
+
+
+<a href='{{ review.get_message_url }}' class='btn btn-primary buttonspace' >Back to Messages</a>
+
+</div>
+</div>
+
+
+
+
+{% endblock %}
+

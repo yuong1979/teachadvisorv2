@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+<style>
+{% block style %}
+/*.jumbotron {
+  background-color:#155A1E;
+  color:#FFF;
+
+}*/
+
+
+
+
+{% endblock %}
+</style>
+
+
+{% block special %}
+
+<script>
+  window.onload = function() {
+    $( "#div_id_subject_1 label" ).on( "click", function() {
+      $( "#div_id_subject_2 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+      $( "#div_id_subject_3 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+    });
+    $( "#div_id_subject_2 label" ).on( "click", function() {
+      $( "#div_id_subject_1 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+      $( "#div_id_subject_3 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+    });
+    $( "#div_id_subject_3 label" ).on( "click", function() {
+      $( "#div_id_subject_1 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+      $( "#div_id_subject_2 input" ).each(function() {
+        $( this ).prop( "checked", false );
+      });
+    });
+  };
+</script>
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><h4 class="panel-title"><b>Your analytics over the most recent 30 days</b></h4></div>
+<div class="panel-body"><br>
+
+
+    {% if request.user.student.function %}
+
+  {% crispy form %}
+
+<div class="row"></div><br><br>
+
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+
+          <center><b>No. of Views vs Messages vs Orders  </b></center>
+
+        <div id="chart_div1"></div>
+
+      </div>
+      </div>
+
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+
+          <center><b>No. of Views vs Unique Views  </b></center>
+
+        <div id="chart_div2"></div>
+
+      </div>
+      </div>
+
+
+      <div class="panel panel-default">
+
+        <div class="panel-body">
+
+          <center><b>Total Views vs Messages vs Orders  </b></center>
+
+        <div id="chart_div3"></div>
+
+      </div>
+      </div>
+
+    {% endif %}
+
+
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<div id="chart_div"></div>
+
+<script type="text/javascript">
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart1);
+
+function chart1() {
+
+      // doing it in array form
+      var datab = new google.visualization.arrayToDataTable({{ datab|safe }});
+
+      var options = {
+        // title: 'Number of Views, Messages and Orders',
+        width: 850,
+        height: 200,
+        bar: {groupWidth: '75%'},
+
+        chartArea:{left:30,top:20,width:'75%',height:'65%'},
+
+        // vAxis: { gridlines: { count: 4 } },
+        legend: 'none',
+        // legend: {position: 'right', maxLines: 3},
+        colors: ['90AFC5', '336B87', '2A3132'],
+        // isStacked: true,royalblue, lightblue, powderblue
+
+        hAxis: {
+          // title: 'Analytics for last 2 weeks',
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          // title: 'Count',
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+          // baselineColor: '#FFFFFF',
+        }
+      };
+
+      var material = new google.visualization.ColumnChart(document.getElementById('chart_div1'));
+      material.draw(datab, options);
+    }
+
+
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(chart2);
+
+function chart2() {
+
+      // doing it in array form
+      var datal = new google.visualization.arrayToDataTable({{ datal|safe }});
+
+      var options = {
+        // title: 'Number of Unique Views versus Views',
+        width: 850,
+        height: 200,
+        // bar: {groupWidth: '10%'},
+        // vAxis: { gridlines: { count: 4 } },
+        legend: 'none',
+
+        chartArea:{left:30,top:20,width:'75%',height:'65%'},
+        // legend: {position: 'right', maxLines: 3},
+        colors: ['763626', '90AFC5'],
+        // isStacked: true,royalblue, lightblue, powderblue
+
+        hAxis: {
+          // title: 'Analytics for last 2 weeks',
+          direction: 1,
+          textPosition:'out',
+          textStyle:{color: 'black', fontSize: 10},
+          format:'none',
+          slantedText:true,
+          slantedTextAngle:45,
+          gridlines: {
+              color: 'transparent'
+          },
+          baselineColor: 'black',
+          
+        },
+        vAxis: {
+          // title: 'Count',
+          direction: 1,
+          textStyle:{color: 'black', fontSize: 10},
+          gridlines: {
+              color: 'transparent'
+          },
+          format: '#,###',
+          // baselineColor: '#FFFFFF',
+        }
+      };
+
+      var material = new google.visualization.LineChart(document.getElementById('chart_div2'));
+      material.draw(datal, options);
+    }
+
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(chart3);
+      
+      function chart3() {
+
+        var datap = new google.visualization.arrayToDataTable({{ datap|safe }});
+
+        var options = {
+          // title: '% of Views, Messages and Orders',
+          width: 600,
+          height: 200,
+          // vAxis: { gridlines: { count: 4 } },
+          // legend: 'none',
+          chartArea:{left:150,top:40,width:'65%',height:'100%'},
+          legend: {position: 'right', maxLines: 3},
+          colors: ['90AFC5', '336B87', '2A3132'],
+
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div3'));
+
+        chart.draw(datap, options);
+      }
+
+</script>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+<style>
+{% block style %}
+/*.jumbotron {
+	background-color:#155A1E;
+	color:#FFF;
+}*/
+
+table {
+    border-collapse: collapse;
+/*    border: 1px solid #ddd;*/
+/*	padding: 30px 10px 10px 10px;*/
+
+	
+	height: 40px;
+	width: 100%;
+	table-layout: fixed;
+    vertical-align: bottom;
+/*    border-bottom: 1px solid #ddd;*/
+/*    text-align: center;*/
+/*    text-align: right;*/
+}
+
+th {
+    background-color: #f5f5f5;
+/*    text-align: center;*/
+	padding: 0px 0px 0px 20px;
+}
+
+td {
+	padding: 10px 10px 10px 20px;
+}
+
+tr:hover {
+	background-color: #f5f5f5;
+}
+
+
+.modal-content video {
+    margin: 0 auto;
+    display: block;
+}
+
+{% endblock %}
+</style>
+
+
+
+
+
+{% block content %}
+<div class="container">
+<small>
+
+<br>
+<br>
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 class="panel-title"><b>Tutorials</b></h4></div>
+            <div class="panel-body">
+
+<br>
+<img src="{% static 'img/Tutorial.png' %}" alt="My image" width=100%/>
+<br>
+<br>
+
+                <br>
+
+                <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal">For Tutors
+                </button>
+
+                <br>
+                <br>
+
+                <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal1">For Students
+                </button>
+
+                <br>
+                <br>
+
+                <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#myModal2">For Tutors - Additional
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="document.getElementById('tutorialVideo').pause();">×</button>
+                    <h4 class="modal-title">Tutors</h4>
+                </div>
+                <div class="modal-body">
+                    <video id="tutorialVideo" controls width="75%">
+                        <source src="{% static 'vid/tutor.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal HTML -->
+    <div id="myModal1" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="document.getElementById('tutorialVideo').pause();">×</button>
+                    <h4 class="modal-title">Student</h4>
+                </div>
+                <div class="modal-body">
+                    <video id="tutorialVideo" controls width="75%">
+                        <source src="{% static 'vid/student.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal HTML -->
+    <div id="myModal2" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="document.getElementById('tutorialVideo').pause();">×</button>
+                    <h4 class="modal-title">Tutors Additional</h4>
+                </div>
+                <div class="modal-body">
+                    <video id="tutorialVideo" controls width="75%">
+                        <source src="{% static 'vid/tutor add.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</small>
+</div> <!-- /container -->
+
+{% endblock %}
+
