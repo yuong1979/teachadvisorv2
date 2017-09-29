@@ -30,19 +30,6 @@ ALLOWED_HOSTS = []
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 TYPE = "base"
 
 # using gmail

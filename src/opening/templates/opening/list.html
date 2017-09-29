@@ -5,19 +5,175 @@
 
 
 {% block meta %}
-     <meta name="title" content="Online Tuition Tutor Job Vacancies in Singapore – Tech Advisor">
-     <meta name="description" content="Teach Advisor-The premier online tutoring agency in Singapore which helps tutors find jobs, build their brand, monitor their progress, and advertise easily!">
-     <meta name="keywords" content=": online tutoring agency ,online tuition job in Singapore, online tuition job openings singapore, mathematics teacher jobs in singapore, tuition jobs Singapore ,online tuition teacher job ,teaching vacancies in Singapore ,private tutor jobs Singapore">
- {% endblock %}
- 
+<meta name="title" content="Online Tuition Tutor Job Vacancies in Singapore – Tech Advisor">
+<meta name="description"
+      content="Teach Advisor-The premier online tutoring agency in Singapore which helps tutors find jobs, build their brand, monitor their progress, and advertise easily!">
+<meta name="keywords"
+      content=": online tutoring agency ,online tuition job in Singapore, online tuition job openings singapore, mathematics teacher jobs in singapore, tuition jobs Singapore ,online tuition teacher job ,teaching vacancies in Singapore ,private tutor jobs Singapore">
+{% endblock %}
+
 {% block head_title %}Online Tuition Tutor Job Vacancies in Singapore – Tech Advisor{% endblock %}
+<style>
+    {% block style %}
+
+    #section-opening {
+        background-color: beige;
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    {% endblock %}
+
+</style>
 
 {% block content %}
-<br>
-<div class="container">
+
 <small>
 
+
+    <div id="myDiv">
+        <div class="container">
+            <br>
+            <div class="col-md-12">
+                <div class="well">
+                    <button class="close" onclick="document.getElementById('myDiv').style.display='none'">x</button>
+                    <h2>Trusted Online Platform for Private​ ​Tutor​ ​Jobs​ ​Singapore​ </h2>
+
+                        <p class="fpfont text-justify">Looking for teaching​ ​vacancies​ ​in​ ​Singapore​? You
+                            have landed on the right page!</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="section-opening">
+        <div class="container">
+            <h2 class="text-center">Benefits​ ​Which​ ​Teach​ ​Advisor​ ​Tutors​ ​Enjoy​ </h2>
+
+
+            <div class="col-md-4">
+                <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
+                <h2 align="center" class="feature-heading">Well​ ​Paid</h2>
+                <br>
+                <p class="fpfont text-justify">All our tutors are better paid as compared to other online freelance
+                    tuition​
+                    ​jobs​ ​Singapore, we don't take commission from you.</p>
+            </div>
+
+            <div class="col-md-4">
+                <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
+                <h2 align="center" class="feature-heading">More ​Opportunities</h2>
+                <br>
+                <p class="fpfont text-justify">Tutors can contact students directly - students from lower primary to
+                    the
+                    university level.</p>
+            </div>
+
+            <div class="col-md-4">
+                <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
+                <h2 align="center" class="feature-heading">Career​ ​Boost</h2>
+                <br>
+                <p class="fpfont text-justify">Our online​ ​tutoring​​ tutors allows tutor to build their brand
+                    through
+                    accumalating reviews and advertising.</p>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="container">
+
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><b>Search for Tuition
+                            Jobs</b></a>
+                    </h4>
+                </div>
+                <div class="panel-body">
+
+                    {% crispy form %}
+
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+
+
+        <div id="search-results">
+
+            {% if object_list %}
+
+            {% for i in object_list %}
+
+            <div class="col-sm-6 col-md-3">
+
+                <div class="thumbnail">
+                    <div class="caption">
+
+                        <h5><b><a href='{{i.get_absolute_url }}'>{{ i.title|truncatechars:24 }}</a></b></h5>
+
+                        <p><b>Subject:</b> {{ i.subject }}</p>
+
+                        <p><b>Level:</b> {{ i.level }}</p>
+
+                        <p>
+                            <b>Offering:</b>
+                            {% if i.salary_range != None %}
+                            ${{ i.salary_range }}/Hour
+                            {% endif %}
+                        </p>
+
+                        <p><b>Location:</b> {{ i.region }}</p>
+
+                        <!-- 					<p><b>Favorited:</b>
+                                  {% if i.i.favopening.teacher.all.count %}
+                                  {{ i.i.favopening.teacher.all.count }} Times
+                                  {% else %}
+                                  0 Times
+                                  {% endif %}
+                                            </p> -->
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+            {% else %}
+
+            There are no results matching your query
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="row"></div>
+
+
+        {% if page_obj.has_previous %}
+        <a href='{% url "OpeningList" %}?page={{ page_obj.previous_page_number }}'>Previous</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}
+        {% if page_obj.has_next %}
+        <a href='{% url "OpeningList" %}?page={{ page_obj.next_page_number }}'>Next</a>
+        {% endif %}
+
+
+</small>
+</div> <!-- /container -->
+
+{% endblock %}
 <script>
+    {% block script %}
 
 
     function saveActiveTab() {
@@ -45,9 +201,9 @@
     window.onload = function () {
         saveActiveTab();
 
-        $("[id^=id_subject]").on( "change", function () {
-           var subjectSelects = $("[id^=id_subject]").not(this);
-             subjectSelects.val( "" );
+        $("[id^=id_subject]").on("change", function () {
+            var subjectSelects = $("[id^=id_subject]").not(this);
+            subjectSelects.val("");
         });
 
 
@@ -63,20 +219,19 @@
             refreshSearchResults(form);
         });
 
-         // ajax reload search results on text/number fields change
+        // ajax reload search results on text/number fields change
         //$("#search-teachers-form input[type=text], " +
         //    "#search-teachers-form input[type=number]").on("keyup change", function () {
         //    var form = $("#search-teachers-form");
         //    refreshSearchResults(form);
         //});
 
-
         // comment this to reload page on hitting 'Refresh'
-         $("#search-openings-form input[type=submit]").on('click', function (e) {
-             e.preventDefault();
-             var form = $("#search-openings-form");
-             refreshSearchResults(form);
-         });
+        $("#search-openings-form input[type=submit]").on('click', function (e) {
+            e.preventDefault();
+            var form = $("#search-openings-form");
+            refreshSearchResults(form);
+        });
 
 
         // ajax reset search results by Reset btn
@@ -89,7 +244,7 @@
 
             e.preventDefault();
             // var activeTabId = $(".tab-pane.active a[data-toggle='tab']").attr('href');
-            $('#search-openings-form').load(location.pathname + ' #search-openings-form', function(){
+            $('#search-openings-form').load(location.pathname + ' #search-openings-form', function () {
                 $(this).children().unwrap();
                 window.onload();
                 // $('.nav-tabs a[href=' + activeTabId + ']').tab('show');
@@ -97,156 +252,12 @@
                 refreshSearchResults(form);
             });
         })
-  };
-  
+    };
 
 
-
+    {% endblock %}
 
 </script>
-
-
-          <div class="container">
-             <div class="col-md-12">
-               <div class="well">
- 
-                 <h1>Trusted Online Platform for Private​ ​Tutor​ ​Jobs​ ​Singapore​ </h1>
-                 <h4>
-                   <p class="fpfont text-justify">Looking for teaching​ ​vacancies​ ​in​ ​Singapore​? You have landed on the right page!</p>
-                 </h4>
- 
-               </div>
-               <h2 class="text-center">Benefits​ ​Which​ ​Teach​ ​Advisor​ ​Tutors​ ​Enjoy​ </h2>
- 
-             </div>
- 
-             <div class="col-md-4">
-               <br>
-               <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
-               <h2 align="center" class="feature-heading">Well​ ​Paid</h2>
-               <br>
-               <p class="fpfont text-justify">All our tutors are better paid as compared to other online freelance tuition​ ​jobs​ ​Singapore, we don't take commission from you.</p>
-             </div>
- 
-             <div class="col-md-4">
-               <br>
-               <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
-               <h2 align="center" class="feature-heading">More ​Opportunities</h2>
-               <br>
-               <p class="fpfont text-justify">Tutors can contact students directly - students from lower primary to the university level.</p>
-             </div>
- 
-             <div class="col-md-4">
-               <br>
-               <!--<h1 align="center"><i class="fa fa-dollar fa-lg" aria-hidden="true"></i></h1>-->
-               <h2 align="center" class="feature-heading">Career​ ​Boost</h2>
-               <br>
-               <p class="fpfont text-justify">Our online​ ​tutoring​​ tutors allows tutor to build their brand through accumalating reviews and advertising.</p>
-             </div>
- 
-           </div>
-   <br>
-
-
-
-
-<div class="panel-group" id="accordion">
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><b>Search for Tuition Jobs</b></a>
-        </h4>
-      </div>
-        <div class="panel-body">
-
-        {% crispy form %}
-
-    	</div>
-      </div>
-</div> 
-
-
-<br>
-
-
-
-
-
-<div id="search-results">
-
-{% if object_list %}
-
-{% for i in object_list %}
-
-<div class="col-sm-6 col-md-3">
-
-    <div class="thumbnail">
-      <div class="caption">
-
-          <h5><b><a href='{{i.get_absolute_url }}'>{{ i.title|truncatechars:24 }}</a></b></h5>
-
-					<p><b>Subject:</b> {{ i.subject }}</p>
-
-					<p><b>Level:</b> {{ i.level }}</p>
-
-					<p>
-          <b>Offering:</b>
-					{% if i.salary_range != None %}
-					${{ i.salary_range }}/Hour
-					{% endif %}
-          </p>
-
-					<p><b>Location:</b> {{ i.region }}</p>
-
-<!-- 					<p><b>Favorited:</b>
-          {% if i.i.favopening.teacher.all.count %}
-          {{ i.i.favopening.teacher.all.count }} Times
-          {% else %}
-          0 Times
-          {% endif %}
-					</p> -->
-
-    </div>
-    </div>
-
-
-</div>
-
-{% endfor %}
-
-{% else %}
-
-There are no results matching your query
-
-{% endif %}
-
-</div>
-
-
-<div class="row"></div>
-
-
-{% if page_obj.has_previous %}
-	<a href='{% url "OpeningList" %}?page={{ page_obj.previous_page_number }}'>Previous</a>
-{% endif %}
-Page {{ page_obj.number }} of {{ paginator.num_pages }}
-{% if page_obj.has_next %}
-	<a href='{% url "OpeningList" %}?page={{ page_obj.next_page_number }}'>Next</a>
-{% endif %}
-
-
-</small>
-</div> <!-- /container -->
-
-{% endblock %}
-
-
-
-
-
-
-
 <!-- <table class="table">
 
 <b>
