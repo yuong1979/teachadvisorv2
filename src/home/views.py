@@ -248,7 +248,7 @@ class ContactView(FormView):
 
 
 def Test(request):
-	print "test"
+	print ("test")
 	return redirect("Home")
 
 
