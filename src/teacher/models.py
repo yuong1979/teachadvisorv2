@@ -6,7 +6,7 @@ from django.db.models import Avg, Max
 from django.db.models.signals import pre_save, post_save
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import RegexValidator
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
 from django.utils import timezone
@@ -99,7 +99,7 @@ gender = (
 
 class Teacher(models.Model):
 	phone_regex = RegexValidator(regex=r'^\d{4}-\d{4}$', message="Phone number must be entered in the format: 'XXXX-XXXX'.")
-	user = models.OneToOneField(settings.AUTH_USER_MODEL)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	function = models.CharField(max_length=20, null=True, blank=True)
 
 	title = models.CharField(max_length=120)
@@ -169,8 +169,10 @@ class Teacher(models.Model):
 	doc6description = models.CharField(max_length=60, blank=True, null=True)
 
 
-	def __unicode__(self):
-		return self.user.username
+	def __str__(self):
+		return str(self.user.username)
+
+
 
 	def get_absolute_url(self):
 		return reverse('TeacherDetail', kwargs={'pk': self.pk})

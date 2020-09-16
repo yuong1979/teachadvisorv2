@@ -9,7 +9,7 @@ from tags.models import TagOpening, ViewOpening
 from tags.views import FavOpening
 from opening.forms import OpeningForm, SearchOpeningForm
 from mixins.mixins import UserChangeManagerMixin, LoginRequiredMixin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
 from itertools import chain
@@ -63,8 +63,8 @@ class OpeningCreate(LoginRequiredMixin, FormView):
     template_name = 'opening/create.html'
 
     def form_valid(self, form):
-    	user = self.request.user
-    	obj_comp = Student.objects.filter(user=user).first()
+        user = self.request.user
+        obj_comp = Student.objects.filter(user=user).first()
 
         i = form.save(commit=False)
         i.user = user

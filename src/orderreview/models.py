@@ -7,16 +7,16 @@ from messaging.models import Message
 from orders.models import Order
 from django.db import models
 from django.db.models.signals import pre_save, post_save
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 import datetime
 
 
 class ReviewTeacher(models.Model):
-	teacher = models.ForeignKey(Teacher)
-	student = models.ForeignKey(Student)
-	opening = models.ForeignKey(Opening)
-	message = models.ForeignKey(Message)
-	order = models.ForeignKey(Order)
+	teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+	student = models.ForeignKey(Student, on_delete=models.CASCADE)
+	opening = models.ForeignKey(Opening, on_delete=models.CASCADE)
+	message = models.ForeignKey(Message, on_delete=models.CASCADE)
+	order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
 	subject = models.ForeignKey(Subject_Expertise, on_delete=models.CASCADE, null=True, blank=True)
 	level = models.ForeignKey(Level_Expertise, on_delete=models.CASCADE, null=True, blank=True)
@@ -37,8 +37,9 @@ class ReviewTeacher(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 
-	def __unicode__(self):
+	def __str__(self):
 		return str(self.teacher)
+
 
 	def get_teacher_url(self):
 		teacher_id = self.teacher.id

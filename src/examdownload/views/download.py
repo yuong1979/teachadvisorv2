@@ -33,7 +33,7 @@ class DownloadView(LoginRequiredMixin, View):
 
         exam = link.exam
 
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             try:
                 usercost_instance = UserCredit.objects.get(user=request.user)
                 if usercost_instance.credit - exam.creditcost >= 0:

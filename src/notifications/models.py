@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 # from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from messaging.models import Message
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.sites.models import Site
 from django.conf import settings
 from django.db import models
@@ -62,10 +62,10 @@ class NotificationManager(models.Manager):
 
 
 class Notification(models.Model):
-	sender = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
-	recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="notifications")
+	sender = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
+	recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="notifications", on_delete=models.CASCADE)
 	action = models.CharField(max_length=255)
-	message = models.ForeignKey(Message, null=True)
+	message = models.ForeignKey(Message, null=True, on_delete=models.CASCADE)
 	read = models.BooleanField(default=False)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 

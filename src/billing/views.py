@@ -6,7 +6,7 @@ from billing.models import Transaction, UserCheckOut, ImageSubscription, UserCre
 from billing.forms import CreditForm, ImgSubForm, FeatureSubForm, AnaSubForm, StudentBISubForm
 from billing.control import feat_days_choices_dict, img_days_choices_dict, ana_days_choices_dict, studentbi_days_dict
 from mixins.mixins import GetCheckoutMixin, LoginRequiredMixin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib import messages
 import braintree
 import datetime
@@ -462,7 +462,7 @@ class StripeInvoice(LoginRequiredMixin, GetCheckoutMixin, TemplateView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(StripeInvoice, self).get_context_data(*args, **kwargs)
-		if self.request.user.is_authenticated():
+		if self.request.user.is_authenticated:
 			#retrieving contents of the transaction that the user has purchased
 			context["user"] = self.get_transaction().user
 			context["transaction_id"] = self.get_transaction().transaction_id
@@ -474,7 +474,7 @@ class StripeInvoice(LoginRequiredMixin, GetCheckoutMixin, TemplateView):
 			del self.request.session["credit_id"]
 			del self.request.session["transaction_id"]
 
-		elif not self.request.user.is_authenticated():
+		elif not self.request.user.is_authenticated:
 			return Http404
 
 		return context

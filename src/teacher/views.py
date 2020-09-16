@@ -13,7 +13,7 @@ from tags.models import ViewTeacherRecord
 # from tags.views import FavTeacher
 from billing.control import creditstart
 from mixins.mixins import UserChangeManagerMixin, LoginRequiredMixin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q, Avg, Max

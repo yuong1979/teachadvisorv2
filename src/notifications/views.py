@@ -4,7 +4,7 @@ from django.views.generic.base import View
 from messaging.models import Message
 from notifications.models import Notification
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 # from django.conf import settings
 import json
 
@@ -54,7 +54,7 @@ def get_notifications_ajax(request):
 
 class MsgCountView(View):
 	def get(self, request, *args, **kwargs):
-		if request.user.is_authenticated():
+		if request.user.is_authenticated:
 			notifications = Notification.objects.all_for_user(request.user).recent()
 			count = notifications.count()
 			request.session["unread_count"] = count

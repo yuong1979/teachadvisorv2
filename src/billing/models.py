@@ -6,7 +6,7 @@ from variables.models import Country, Subject_Expertise, Level_Expertise, Educat
 import braintree
 
 class Transaction(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	price = models.DecimalField(max_digits=100, decimal_places=2, default=0, null=True)
 	beforecredit = models.IntegerField(default=0)
 	credit = models.IntegerField(default=0)
@@ -18,20 +18,22 @@ class Transaction(models.Model):
 	# payment method
 	# last_four
 
-	def __unicode__(self):
-		return "%s" %(self.transaction_id)
+	def __str__(self):
+		return str(self.transaction_id)
 
 class UserCredit(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	credit = models.IntegerField(default=0)
 
-	def __unicode__(self):
-		return "%s" %(self.user)
+
+	def __str__(self):
+		return str(self.user)
+
 
 
 #where user can earn credits through sharing and verification.
 class UserMicell(models.Model):
-	user = models.OneToOneField(settings.AUTH_USER_MODEL)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	user_verify = models.BooleanField(default=False)
 	FBshare = models.BooleanField(default=False)
 	FBlike = models.BooleanField(default=False)
@@ -40,9 +42,8 @@ class UserMicell(models.Model):
 	INSTfollow = models.BooleanField(default=False)
 	emailUnsub = models.BooleanField(default=False)
 
-	def __unicode__(self):
-		return "%s" %(self.user)
-
+	def __str__(self):
+		return str(self.user)
 
 
 class CreditToCash(models.Model):
@@ -51,63 +52,65 @@ class CreditToCash(models.Model):
 	credits = models.IntegerField(default=0)
 	discount = models.DecimalField(max_digits=100, decimal_places=2, default=0, null=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		return str(self.label)
 
+
 class ImageSubscription(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	subenddate = models.DateField()
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-	def __unicode__(self):
-		return "%s" %(self.user)
+	def __str__(self):
+		return str(self.user)
 
 class AnalyticsSubscription(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	subenddate = models.DateField()
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-	def __unicode__(self):
-		return "%s" %(self.user)
+	def __str__(self):
+		return str(self.user)
 
 class FeaturedUser_0(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 	subenddate = models.DateField(null=True, blank=True)
-	subject = models.OneToOneField(Subject_Expertise, null=True, blank=True)
+	subject = models.OneToOneField(Subject_Expertise, null=True, blank=True, on_delete=models.CASCADE)
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-	def __unicode__(self):
-		return "%s" %(self.subject)
+	def __str__(self):
+		return str(self.subject)
 
 class FeaturedUser_1(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 	subenddate = models.DateField(null=True, blank=True)
-	subject = models.OneToOneField(Subject_Expertise, null=True, blank=True)
+	subject = models.OneToOneField(Subject_Expertise, null=True, blank=True, on_delete=models.CASCADE)
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-	def __unicode__(self):
-		return "%s" %(self.subject)
+	def __str__(self):
+		return str(self.subject)
 
 class StudentBISubscription(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	subenddate = models.DateField()
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-	def __unicode__(self):
-		return "%s" %(self.user)
+	def __str__(self):
+		return str(self.user)
 
 class UserCheckOut(models.Model):
-	user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, blank=True)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 	# email = models.EmailField(unique=True)
 	braintree_id = models.CharField(max_length=120, null=True, blank=True)
 
-	def __unicode__(self):
-		return self.user.email
+
+	def __str__(self):
+		return str(self.user.email)
 
 	# def __init__(self, ):
 	# 	self.customer_id = self.get_braintree_id()

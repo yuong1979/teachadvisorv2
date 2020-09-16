@@ -1,13 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from django.core.urlresolvers import reverse_lazy
 from student.models import Student
 from django.db.models import Q
 from student.forms import StudentAddForm, StudentEditForm
 # from variables.models import FunctionType
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.urls import reverse, reverse_lazy
 from django.http import Http404
 from mixins.mixins import UserChangeManagerMixin
 from billing.models import UserCredit, StudentBISubscription

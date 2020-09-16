@@ -174,8 +174,8 @@ DATABASES = {
     }
 }
 
-# confidential
-# localhost - need to install postgres under pip install and start a new database in the 
+# # confidential
+# # localhost - need to install postgres under pip install and start a new database in the 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',

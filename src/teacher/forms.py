@@ -7,7 +7,7 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div, Mul
 from crispy_forms.bootstrap import TabHolder, Tab, InlineCheckboxes, AppendedText, InlineRadios
 from variables.models import Country, Subject_Expertise, Level_Expertise, Educational_Level, Education, Region, Education_School, Expertise_Type
 from tags.models import TagTeacher
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from billing.models import ImageSubscription
 
 

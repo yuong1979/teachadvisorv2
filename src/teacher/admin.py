@@ -10,7 +10,7 @@ from teacher.models import Teacher
 # 		model = Teacher
 
 class TeacherAdmin(admin.ModelAdmin):
-	list_display = ['__unicode__','first_name','last_name','contact','trial_acc']
+	list_display = ['first_name','last_name','contact','trial_acc']
 	inlines = [
 	]
 	class Meta:

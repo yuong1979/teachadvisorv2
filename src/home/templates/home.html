@@ -74,6 +74,21 @@
 			    <a href='{% url "MessageListViewAll" %}' data-action='show-spinner' class='btn btn-primary buttonspace' >Messages  <i class="fa fa-envelope fa-x"></i></a>
 			    <a href='{{ request.user.teacher.get_absolute_url }}' data-action='show-spinner' class='btn btn-primary buttonspace' >Personal Details  <i class="fa fa-user fa-x"></i></a>
 			    <a href='{% url "FavOpeningList" %}' data-action='show-spinner' class='btn btn-primary buttonspace' > Favorite Openings  <i class="fa fa-flag fa-x"></i></a>
+
+
+<!--           <a href='{% url "Test" %}' data-action='show-spinner' class='btn btn-default buttonspace' > Test</a> -->
+
+
+
+<!--             <form id="form{{forloop.parentloop.counter}}_{{forloop.counter}}" action="{% url 'examdownload_confirm' %}" method="GET">
+            <input type="hidden" value="{{exam.id}}" name="exam">
+            <a href="#" onclick="document.getElementById('form{{forloop.parentloop.counter}}_{{forloop.counter}}').submit();">
+                <i class="fa fa-cloud-download"></i>
+                <span>{{exam.title}}</span>
+            </a>
+            </form>
+ -->
+
 			  </div>
 
 			</div>

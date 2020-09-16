@@ -3,7 +3,7 @@ from student.models import Student
 from variables.models import Country, Educational_Level, Subject_Expertise, Level_Expertise, Region
 from django.db import models
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import RegexValidator
 from django.contrib.admin.widgets import AdminDateWidget
@@ -11,7 +11,7 @@ from django.contrib.admin.widgets import AdminDateWidget
 class Opening(models.Model):
 
 	hiring_student = models.ForeignKey(Student, on_delete=models.CASCADE)
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	title = models.CharField(max_length=60)
 	subject = models.ForeignKey(Subject_Expertise, on_delete=models.CASCADE)
 	level = models.ForeignKey(Level_Expertise, on_delete=models.CASCADE)
@@ -38,5 +38,5 @@ class Opening(models.Model):
 		test = self.hiring_student.subject
 		return test
 
-	def __unicode__(self):
-		return self.title
+	def __str__(self):
+		return str(self.title)

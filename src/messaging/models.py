@@ -4,7 +4,7 @@ from opening.models import Opening
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class MessageManager(models.Manager):
@@ -39,11 +39,11 @@ order_status = (
 
 class Message(models.Model):
 
-	senduser = models.ForeignKey(settings.AUTH_USER_MODEL)
-	touser = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='to_user')
+	senduser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	touser = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='to_user', on_delete=models.CASCADE)
 	mainmessage = models.BooleanField(default=False)
 	title = models.CharField(max_length=120) #- company opening and date
-	re_opening = models.ForeignKey(Opening)
+	re_opening = models.ForeignKey(Opening, on_delete=models.CASCADE)
 
 	msgtype = models.CharField(max_length=30, choices=order_status, default="Inactive")
 
@@ -56,8 +56,9 @@ class Message(models.Model):
 
 	objects = MessageManager()
 
-	def __unicode__(self):
-		return self.title
+
+	def __str__(self):
+		return str(self.title)
 
 	def get_absolute_url(self):
 		return reverse("MessageDetail", kwargs={"pk":self.pk})

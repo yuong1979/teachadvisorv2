@@ -6,7 +6,7 @@ from messaging.models import Message
 
 
 class MessageAdmin(admin.ModelAdmin):
-	list_display = ['__unicode__','re_opening','mainmessage','msgtype','parent_id','timestamp']
+	list_display = ['re_opening','mainmessage','msgtype','parent_id','timestamp']
 	inlines = [
 	]
 	class Meta:

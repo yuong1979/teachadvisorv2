@@ -13,7 +13,7 @@ from django.db import models
 
 
 class BlogPost(models.Model):
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=320)
     post_summary = models.TextField(blank=True, verbose_name="Pre Video Content")
     youtube_video_id = models.CharField(max_length=20, blank=True)

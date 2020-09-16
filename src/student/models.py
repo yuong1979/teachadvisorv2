@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 import shutil
 from django.core.files.storage import FileSystemStorage
 from django.core.validators import RegexValidator
@@ -38,7 +38,7 @@ class Student(models.Model):
 	# phone_regex = RegexValidator(regex=r'^\d{8}$', message="Phone number must be entered in the format: 'XXXXXXX'.")
 
 	function = models.CharField(max_length=20, null=True, blank=True)
-	user = models.OneToOneField(settings.AUTH_USER_MODEL)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	first_name = models.CharField(max_length=60)
 	last_name = models.CharField(max_length=60)
 	contact = models.CharField(max_length=20,validators=[phone_regex], blank=False, null=False) # validators should be a list
@@ -64,8 +64,8 @@ class Student(models.Model):
 	def get_update(self):
 		return reverse('StudentUpdate', kwargs={'pk': self.pk})
 
-	def __unicode__(self):
-		return self.user.username
+	def __str__(self):
+		return str(self.user.username)
 
 	def test(self):
 		test = self.id

@@ -5,7 +5,7 @@ from orderreview.models import ReviewTeacher
 
 
 class ReviewTeacherAdmin(admin.ModelAdmin):
-	list_display = ['__unicode__','opening','subject','level','price','cnc','datebetween']
+	list_display = ['opening','subject','level','price','cnc','datebetween']
 	inlines = [
 	]
 	class Meta:

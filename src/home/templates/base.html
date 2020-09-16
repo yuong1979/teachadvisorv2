@@ -275,6 +275,7 @@
 <div class='container'>
 
   {% for message in messages %}
+  <br>
     <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -557,7 +558,11 @@
               <br>
               <br>
 
-              {% if not request.user.teacher.function and not request.user.student.function and not request.get_full_path == "/teacher/add/" and not request.get_full_path == "/student/add/" and not request.get_full_path == "/termsandconditions/" and not request.get_full_path == "/privacypolicy/" and not request.get_full_path == "/disclaimer/" %}
+
+              {% if not request.user.teacher.function and not request.user.student.function and not request.get_full_path == "/tutor/add/" and not request.get_full_path == "/student/add/" and not request.get_full_path == "/termsandconditions/" and not request.get_full_path == "/privacypolicy/" and not request.get_full_path == "/disclaimer/" %}
+
+
+
 
               <br>
 

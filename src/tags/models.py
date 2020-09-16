@@ -5,7 +5,7 @@ from student.models import Student
 from messaging.models import Message
 from orders.models import Order
 from variables.models import Country, Subject_Expertise, Level_Expertise, Educational_Level, Education, Region, Education_School, Expertise_Type
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save, post_save
@@ -51,7 +51,7 @@ class TagOpening(models.Model):
 
 #everytime a teacher a viewed it will store the identity of the student on this model
 class ViewTeacherUnique(models.Model):
-	teacher = models.OneToOneField(Teacher, blank=True, default=None)
+	teacher = models.OneToOneField(Teacher, blank=True, default=None, on_delete=models.CASCADE)
 	student = models.ManyToManyField(Student, blank=True, default=None)
 	updated = models.DateTimeField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
@@ -65,7 +65,7 @@ class ViewTeacherUnique(models.Model):
 
 #everytime a teacher is viewed it will store ONE count of the view on this model
 class ViewTeacherNonUnique(models.Model):
-	teacher = models.OneToOneField(Teacher, blank=True, default=None)
+	teacher = models.OneToOneField(Teacher, blank=True, default=None, on_delete=models.CASCADE)
 	count = models.IntegerField(default=0)
 	updated = models.DateTimeField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
@@ -76,7 +76,7 @@ class ViewTeacherNonUnique(models.Model):
 
 
 class ViewOpening(models.Model):
-	opening = models.OneToOneField(Opening, blank=True, default=None)
+	opening = models.OneToOneField(Opening, blank=True, default=None, on_delete=models.CASCADE)
 	teacher = models.ManyToManyField(Teacher, blank=True, default=None)
 	updated = models.DateTimeField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
@@ -86,7 +86,7 @@ class ViewOpening(models.Model):
 
 
 class BlockUser(models.Model):
-	blocker = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, default=None, related_name='blocker_u')
+	blocker = models.OneToOneField(settings.AUTH_USER_MODEL, blank=True, default=None, related_name='blocker_u', on_delete=models.CASCADE)
 	blocked = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, default=None, related_name='blocked_u')
 	updated = models.DateTimeField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
@@ -96,7 +96,7 @@ class BlockUser(models.Model):
 
 
 class FavTeacher(models.Model):
-	teacher = models.OneToOneField(Teacher, blank=True, default=None)
+	teacher = models.OneToOneField(Teacher, blank=True, default=None, on_delete=models.CASCADE)
 	student = models.ManyToManyField(Student, blank=True, default=None)
 	updated = models.DateTimeField(auto_now=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
@@ -105,7 +105,7 @@ class FavTeacher(models.Model):
 		return str(self.teacher)
 
 class FavOpening(models.Model):
-	opening = models.OneToOneField(Opening, blank=True, default=None)
+	opening = models.OneToOneField(Opening, blank=True, default=None, on_delete=models.CASCADE)
 	teacher = models.ManyToManyField(Teacher, blank=True, default=None)
 	# updated = models.DateTimeField(auto_now=True)
 	# timestamp = models.DateTimeField(auto_now_add=True)
@@ -117,9 +117,9 @@ class FavOpening(models.Model):
 
 class SearchWordTeacherRecord(models.Model):
 	word = models.CharField(max_length=30, null=False, blank=False)
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
-	subject = models.ForeignKey(Subject_Expertise, null=True, blank=True)
-	level = models.ForeignKey(Level_Expertise, null=True, blank=True)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+	subject = models.ForeignKey(Subject_Expertise, null=True, blank=True, on_delete=models.CASCADE)
+	level = models.ForeignKey(Level_Expertise, null=True, blank=True, on_delete=models.CASCADE)
 	date = models.DateField(auto_now=True)
 
 	def __unicode__(self):
@@ -128,7 +128,7 @@ class SearchWordTeacherRecord(models.Model):
 
 
 class ViewTeacherRecord(models.Model):
-	teacher = models.ForeignKey(Teacher)
+	teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 	uniquecount = models.IntegerField(default=0)
 	nonuniquecount = models.IntegerField(default=0)
 	msgtocount = models.IntegerField(default=0)

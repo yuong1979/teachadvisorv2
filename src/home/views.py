@@ -81,7 +81,7 @@ class HomeView(TemplateView):
 		context["title"] = self.title
 		todate = datetime.datetime.now().date()
 
-		if self.request.user.is_authenticated():
+		if self.request.user.is_authenticated:
 
 			if Teacher.objects.filter(user=self.request.user).exists():
 				user = self.request.user
@@ -90,7 +90,6 @@ class HomeView(TemplateView):
 				usercred_obj = get_object_or_404(UserCredit, user=user)
 				usercred = usercred_obj.credit
 				context["credits"] = usercred
-
 
 				# #retrieve when the user has subcription for document
 				# imgsub = get_object_or_404(ImageSubscription, user=user)
@@ -198,6 +197,7 @@ class HomeView(TemplateView):
 					context["fav_teacher"] = fav_teacher
 
 			else:
+
 				pass
 				
 

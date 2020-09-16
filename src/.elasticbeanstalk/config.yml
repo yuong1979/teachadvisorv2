@@ -1,8 +1,11 @@
 branch-defaults:
   default:
-    environment: testenv
+    environment: prodenv
     group_suffix: null
 environment-defaults:
+  prodenv:
+    branch: null
+    repository: null
   testenv1:
     branch: null
     repository: null

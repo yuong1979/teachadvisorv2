@@ -5,7 +5,7 @@ from student.models import Student
 
 
 class StudentAdmin(admin.ModelAdmin):
-	list_display = ['__unicode__','first_name','last_name','contact']
+	list_display = ['first_name','last_name','contact']
 	inlines = [
 	]
 	class Meta:

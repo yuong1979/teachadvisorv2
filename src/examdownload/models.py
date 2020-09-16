@@ -30,10 +30,10 @@ class TemporaryLink(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,  # noqa pylint: disable=invalid-name
                           editable=False)
-    user = models.ForeignKey(User, related_name='temporarylinks')
+    user = models.ForeignKey(User, related_name='temporarylinks', on_delete=models.CASCADE)
     user_agent = models.CharField(max_length=200)
     user_ip = models.CharField(max_length=100)
-    exam = models.ForeignKey(Exam, related_name='temporarylinks')
+    exam = models.ForeignKey(Exam, related_name='temporarylinks', on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     downloaded_at = models.DateTimeField()

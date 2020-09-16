@@ -35,7 +35,7 @@ class ConfirmTemplateView(LoginRequiredMixin, TemplateView):  # noqa pylint: dis
             context['error'] = ('Exam with id #{} does not exist'
                                 .format(str(exam_id)))
             return self.render_to_response(context, status=406)
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             try:
                 usercost_instance = UserCredit.objects.get(user=request.user)
                 if usercost_instance.credit - exam.creditcost < 0:
